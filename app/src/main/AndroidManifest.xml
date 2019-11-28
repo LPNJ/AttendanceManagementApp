@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateActivity"></activity>
+        <activity android:name=".NumberingActivity"></activity>
+        <activity android:name=".CreateActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".NewAccountCreateActivity" />
         <activity android:name=".MenuActivity" />
