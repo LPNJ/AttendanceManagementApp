@@ -1,6 +1,5 @@
 package validator;
 
-import entity.EditableUserInfo;
 import entity.UserInfo;
 
 public class UserLoginValidator implements Validator<UserInfo> {
@@ -19,4 +18,5 @@ public class UserLoginValidator implements Validator<UserInfo> {
 
         return SUCCESS;
     }
+
 }

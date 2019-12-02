@@ -7,7 +7,7 @@
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/ID"
+        android:id="@+id/register_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.293" />
 
     <EditText
-        android:id="@+id/PASS1"
+        android:id="@+id/register_PASS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.438" />
 
     <EditText
-        android:id="@+id/PASS2"
+        android:id="@+id/register_COMFIRMATION_PASS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.577" />
 
     <Button
-        android:id="@+id/regist"
+        android:id="@+id/registration"
         android:layout_width="151dp"
         android:layout_height="83dp"
         android:text="確定"

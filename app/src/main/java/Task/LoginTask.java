@@ -20,6 +20,8 @@ public class LoginTask extends AsyncTask<String,Integer,Integer> {
 
     private final MainActivity mLoginActivity;
 
+    //private final ;
+
     private final Map<Integer, String> mErrorMessage = new HashMap<>();
 
     /**
@@ -28,6 +30,7 @@ public class LoginTask extends AsyncTask<String,Integer,Integer> {
      */
     public LoginTask(final MainActivity loginActivity) {
         mLoginActivity = loginActivity;
+
         mErrorMessage.put(1, "ログインに失敗しました");
     }
 

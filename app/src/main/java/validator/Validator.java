@@ -1,5 +1,7 @@
 package validator;
 
+import entity.EventInfo;
+
 /**
  * データのバリデーションを行うクラスが実装すべきI/F
  * @param <T> バリデーションするデータの型

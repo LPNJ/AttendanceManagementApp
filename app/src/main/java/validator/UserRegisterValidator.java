@@ -8,7 +8,7 @@ import entity.EditableUserInfo;
  * ユーザーデータをバリデーションするクラス
  *
  */
-public class UserRegistorValidator implements Validator<EditableUserInfo> {
+public class UserRegisterValidator implements Validator<EditableUserInfo> {
     public static final int ERROR_NOT_INPUT = 1;
     public static final int ERROR_INVALID_CHARACTER = 2;
     public static final int ERROR_ID_TOO_LONG = 6;
@@ -28,11 +28,11 @@ public class UserRegistorValidator implements Validator<EditableUserInfo> {
     /**
      * コンストラクタ
      */
-    public UserRegistorValidator() {}
+    public UserRegisterValidator() {}
 
     @Override
     public int validate(EditableUserInfo data) {
-        if (data != null) {
+        if (data == null) {
             throw new IllegalArgumentException(getClass().getSimpleName() + " data is null.");
         }
         // 入力がない
