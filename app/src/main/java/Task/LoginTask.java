@@ -39,8 +39,8 @@ public class LoginTask extends AsyncTask<String,Integer,Integer> {
 
         InputStream is = null;
 
-        //String urlStr = "http://host.domain/login";
-        String urlStr = "https://www.google.co.jp";
+        String urlStr = "http://host.domain/login";
+//        String urlStr = "https://www.google.co.jp";
 
         try {
         URL url = new URL(urlStr);
@@ -57,7 +57,7 @@ public class LoginTask extends AsyncTask<String,Integer,Integer> {
             con.connect();
 
             if(con.getResponseCode() != 200){
-                return 1;
+                return 0;
             } else{
                 return 0;
             }

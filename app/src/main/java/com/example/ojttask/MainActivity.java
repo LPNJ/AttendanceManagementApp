@@ -19,11 +19,11 @@ public class MainActivity extends AppCompatActivity {
     /** ログイン用ボタン */
     Button mLogin;
     /** ログイン用ID */
-    EditText ID;
+    EditText mId;
     /** ログイン用PASSWARD */
-    EditText PASS;
+    EditText mPass;
 
-    private LoginTask loginTask;
+    private LoginTask mLoginTask;
 
     class MainActivityOnClickListener implements View.OnClickListener {
 
@@ -39,14 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.login: {
 
-                    ID = findViewById(R.id.editText_ID);
-                    PASS = findViewById(R.id.editText_PASS);
+                    mId = findViewById(R.id.editText_ID);
+                    mPass = findViewById(R.id.editText_PASS);
 
-                    String id = ID.getText().toString();
-                    String pass = PASS.getText().toString();
+                    String id = mId.getText().toString();
+                    String pass = mPass.getText().toString();
 
-                    loginTask = new LoginTask(MainActivity.this);
-                    loginTask.execute();
+                    mLoginTask = new LoginTask(MainActivity.this);
+                    mLoginTask.execute();
                     //Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     //startActivity(intent);
                 }
