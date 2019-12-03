@@ -18,12 +18,11 @@ import validator.UserRegisterValidator;
 public class RegisterActivity extends AppCompatActivity {
 
     /** ユーザー情報新規作成用ID */
-    EditText mId;
+    private EditText mId;
     /** ユーザー情報新規作成用PASSWARD */
-    EditText mPass;
+    private EditText mPass;
     /** 再入力用PASSWARD */
-    EditText mconfirmationPass;
-
+    private EditText mconfirmationPass;
 
     private final RegisterTask mRegisterTask;
 
@@ -77,18 +76,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.registration:
-//                        String id = ((EditText) findViewById(R.id.register_ID)).getText().toString();
-//                        String pass = ((EditText) findViewById(R.id.register_PASS)).getText().toString();
-//                        String confirmationPass = ((EditText) findViewById(R.id.register_COMFIRMATION_PASS)).getText().toString();
-//                        int returnCode = new UserRegisterValidator().validate(new EditableUserInfo(id, pass, confirmationPass));
-//                        if (returnCode == 0) {
+                        String id = ((EditText) findViewById(R.id.register_ID)).getText().toString();
+                        String pass = ((EditText) findViewById(R.id.register_PASS)).getText().toString();
+                        String confirmationPass = ((EditText) findViewById(R.id.register_COMFIRMATION_PASS)).getText().toString();
+                        int returnCode = new UserRegisterValidator().validate(new EditableUserInfo(id, pass, confirmationPass));
+                        if (returnCode == 0) {
                             mAlertDlg.show();
-//                        } else {
-//                            new AlertDialog.Builder(RegisterActivity.this)
-//                                    .setMessage("エラー")
-//                                    .setPositiveButton("OK", null)
-//                                    .show();
-//                        }
+                        } else {
+                            new AlertDialog.Builder(RegisterActivity.this)
+                                    .setMessage("エラー")
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                        }
                         break;
                     default:
                         break;
