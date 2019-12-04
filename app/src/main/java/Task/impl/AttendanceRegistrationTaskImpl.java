@@ -1,12 +1,32 @@
 package Task.impl;
 
-import android.os.AsyncTask;
+import org.json.JSONObject;
 
-import entity.EventInfo;
+import Task.AbstractAsyncTask;
+import Task.AttendanceRegistrationTask;
+import Task.ResultListener;
+import Task.ServerRequest;
+import entity.AttendanceRequest;
 
-public class AttendanceRegistrationTaskImpl extends AsyncTask<EventInfo,Integer,Integer> {
+public class AttendanceRegistrationTaskImpl extends AbstractAsyncTask<AttendanceRequest, Integer>
+        implements AttendanceRegistrationTask {
+
+    public AttendanceRegistrationTaskImpl(ResultListener listener) {
+        super(ServerRequest.RequestType.REGISTER_ATTENDANCE, listener);
+    }
+
     @Override
-    protected Integer doInBackground(EventInfo... eventInfo) {
-        return null;
+    protected JSONObject createJson(AttendanceRequest... v) {
+        return v[0].toJson();
+    }
+
+    @Override
+    protected Integer parseJson(JSONObject json) {
+        return json.optInt("error", 1);
+    }
+
+    @Override
+    public void execute(AttendanceRequest request, ResultListener listener) {
+        execute(request);
     }
 }
