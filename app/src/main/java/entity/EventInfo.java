@@ -1,21 +1,24 @@
 package entity;
 
-public class EventInfo {
+import org.json.JSONObject;
 
+import java.util.List;
+
+public class EventInfo {
     private final String mEventName;
     private final String mEventDetails;
-    private final String mDate;
-    private final String mTime;
+    private final List<String> mDates;
+    private final List<String> mTime;
     private final String mEventNumber;
 
     /**
      * コンストラクタ
      */
-    public EventInfo(String mEventName, String mEventDetails, String mDate, String mTime, String mEventNumber) {
-        this.mEventName = mEventName;
-        this.mEventDetails = mEventDetails;
-        this.mDate = mDate;
-        this.mTime = mTime;
+    public EventInfo(String eventName, String eventDetail, List<String> dates, List<String> times, String mEventNumber) {
+        this.mEventName = eventName;
+        this.mEventDetails = eventDetail;
+        this.mDates = dates;
+        this.mTime = times;
         this.mEventNumber = mEventNumber;
     }
 
@@ -27,16 +30,15 @@ public class EventInfo {
         return mEventDetails;
     }
 
-    public String getDate() {
-        return mDate;
+    public List<String> getDate() {
+        return mDates;
     }
 
-    public String getTime() {
+    public List<String> getTime() {
         return mTime;
     }
 
-    public String getEvebtNumber() {
+    public String getEventId() {
         return mEventNumber;
     }
-
 }

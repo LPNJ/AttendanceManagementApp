@@ -16,7 +16,7 @@ public class ServerConnector {
     private static final int CONNECTION_TIMEOUT = 30 * 1000;
     private static final int READ_TIMEOUT = 30 * 1000;
 
-    private ServerConnector() {}
+    public ServerConnector() {}
 
     HttpURLConnection getUrlConnection(URL url) throws IOException {
         return (HttpURLConnection) url.openConnection();
@@ -51,7 +51,7 @@ public class ServerConnector {
         }
     }
 
-    public ServerResponse resuest(ServerRequest request) throws IOException {
+    public ServerResponse request(ServerRequest request) throws IOException {
 
         HttpURLConnection con = getHttpURLConnection(request.getUrl());
         con.setConnectTimeout(CONNECTION_TIMEOUT);

@@ -29,14 +29,15 @@ public class ServerRequest {
         }
     }
 
-    enum RequestType {
+    public enum RequestType {
         LOGIN("login", MethodType.POST),
         LOGOUT("logout", MethodType.POST),
         REGISTER_USER("user", MethodType.POST),
         EDIT_EVENT("event", MethodType.POST),
         DELETE_EVENT("event", MethodType.DELETE),
         GET_ALL_EVENT("eventlist", MethodType.GET),
-        REGISTER_ATTENDANCE("attendance", MethodType.POST);
+        REGISTER_ATTENDANCE("attendance", MethodType.POST),
+        GET_ALL_ATTEND_EVENT("attendancelist", MethodType.GET);
 
         private final String mUrl;
         private final MethodType mMethodType;

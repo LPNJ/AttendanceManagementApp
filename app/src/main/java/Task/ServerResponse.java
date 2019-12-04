@@ -47,7 +47,7 @@ public class ServerResponse {
         }
     }
 
-    JSONObject getResponseJson() {
+    public JSONObject getResponseJson() {
         try {
             return new JSONObject(mResponseBody);
         } catch (JSONException e) {
