@@ -10,24 +10,37 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import Task.LoginTask;
+import Task.ResultListener;
+import Task.mock.LoginTaskMock;
 import entity.UserInfo;
 import validator.UserLoginValidator;
-import validator.Validator;
 
 /**
  * ログイン画面=メインアクティビティ
  */
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements ResultListener<Integer> {
     /** 新規登録用ボタン */
-    Button mRegister;
+    private Button mRegister;
     /** ログイン用ボタン */
-    Button mLogin;
+    private Button mLogin;
     /** ログイン用ID */
-    EditText mId;
+    private EditText mId;
     /** ログイン用PASSWARD */
-    EditText mPass;
+    private EditText mPass;
     /** サーバー接続用変数 */
     private LoginTask mLoginTask;
+    /** ログインIDデータ保持用 */
+    String mId_info;
+    /** ログイン用PASSWARDデータ保持用 */
+    String mPass_info;
+
+    /**
+     * デフォルトコンストラクタ
+     */
+    public MainActivity() {
+        super();
+        mLoginTask = new LoginTaskMock(/*this*/);
+    }
 
     class MainActivityOnClickListener implements View.OnClickListener {
 
@@ -43,24 +56,20 @@ public class MainActivity extends AppCompatActivity  {
 
                 case R.id.login: {
 
-                    mId = findViewById(R.id.editText_ID);
-                    mPass = findViewById(R.id.editText_PASS);
+                    mId_info = mId.getText().toString();
+                    mPass_info = mPass.getText().toString();
 
-                    String id = mId.getText().toString();
-                    String pass = mPass.getText().toString();
-
-                    int n = new UserLoginValidator().validate(new UserInfo(id,pass));
+                    int n = new UserLoginValidator().validate(new UserInfo(mId_info,mPass_info));
 
                     if(n == 1){
                         new AlertDialog.Builder(MainActivity.this)
-                                .setMessage("入力されていない項目があります")
-                                .setPositiveButton("OK", null)
+                                .setMessage(R.string.login_error)
+                                .setPositiveButton(R.string.ok, null)
                                 .create()
                                 .show();
                     }
                     else {
-                        mLoginTask = new LoginTask(MainActivity.this);
-                        mLoginTask.execute();
+                        mLoginTask.execute(new UserInfo(mId_info, mPass_info),MainActivity.this);
                     }
                 }
                 break;
@@ -73,6 +82,9 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mId = findViewById(R.id.editText_ID);
+        mPass = findViewById(R.id.editText_PASS);
+
         mRegister = findViewById(R.id.newAccount);
         mLogin = findViewById(R.id.login);
 
@@ -80,6 +92,22 @@ public class MainActivity extends AppCompatActivity  {
 
         mRegister.setOnClickListener(listener);
         mLogin.setOnClickListener(listener);
+
     }
 
+    @Override
+    public void onResult(Integer result) {
+        if (result == 1) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setMessage(R.string.cannot_login)
+                    .setPositiveButton("OK", null)
+                    .create()
+                    .show();
+            return;
+        }
+        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+        startActivity(intent);
+    }
 }
+
+
