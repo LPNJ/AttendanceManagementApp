@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
     public void onResult(Integer result) {
         if (result == 1) {
             new AlertDialog.Builder(MainActivity.this)
-                    .setMessage("ログインに失敗しました")
+                    .setMessage(R.string.cannot_login)
                     .setPositiveButton("OK", null)
                     .create()
                     .show();

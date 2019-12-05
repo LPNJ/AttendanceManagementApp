@@ -78,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity implements ResultListene
      *
      * @param registerTask
      */
-    public RegisterActivity(final RegisterTaskMock registerTask) {
+    public RegisterActivity(final RegisterTask registerTask) {
         super();
         mRegisterTask = registerTask;
         Log.i("Regist", "register activity contstructo has no arg");
@@ -111,7 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements ResultListene
                 Log.i("regAc" , "returncode = "+ returnCode);
                 if (returnCode == 0) {
                     new AlertDialog.Builder(this)
-                            .setMessage("内容を確定しますか？")
+                            .setMessage(R.string.decision)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
