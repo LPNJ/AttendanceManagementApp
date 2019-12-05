@@ -33,7 +33,7 @@ public class CandidateDate {
      * @return
      */
     public String getDateAndTime() {
-        return mDate + " " + mTime;
+        return (mDate + " " + mTime).trim();
     }
 
     /**
@@ -54,10 +54,16 @@ public class CandidateDate {
     }
 
     /**
-     * 出欠登録をした人の一覧を返します。
+     * 引数に指定した状態の参加者名の一覧を返します。
      * @return
      */
-    public List<AttendanceInfo> getAttendancesInfo() {
-        return mAttendanceInfoList;
+    public List<String> getAttendanceNames(AttendanceType type) {
+        List<String> names = new ArrayList<>();
+        for (AttendanceInfo info : mAttendanceInfoList) {
+            if (info.getStatus() == type.mStatus) {
+                names.add(info.getAttendanceName());
+            }
+        }
+        return names;
     }
 }
