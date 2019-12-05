@@ -1,10 +1,6 @@
 package Task;
 
-import entity.EditableUserInfo;
-import entity.UserID;
-import entity.UserInfo;
-
-public interface EventSelectTask {
+public interface RefarenceTask {
 
     /**
      * メインスレッドとは異なる非同期処理（通信など）を実施し、ResultListener に対して

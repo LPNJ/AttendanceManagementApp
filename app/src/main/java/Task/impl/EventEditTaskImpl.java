@@ -6,8 +6,9 @@ import Task.AbstractAsyncTask;
 import Task.EventEditTask;
 import Task.ResultListener;
 import Task.ServerRequest;
+import entity.EventCreateRequest;
 import entity.EventInfo;
-import entity.EventResult;
+import result.EventResult;
 
 public class EventEditTaskImpl extends AbstractAsyncTask<EventInfo, EventResult> implements EventEditTask {
     public EventEditTaskImpl(ResultListener listener) {
@@ -25,7 +26,7 @@ public class EventEditTaskImpl extends AbstractAsyncTask<EventInfo, EventResult>
     }
 
     @Override
-    public void execute(EventInfo eventInfo, ResultListener listener) {
-        super.execute(eventInfo);
+    public void execute(EventCreateRequest request, ResultListener listener) {
+
     }
 }

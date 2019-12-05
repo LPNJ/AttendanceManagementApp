@@ -19,18 +19,6 @@
         app:layout_constraintVertical_bias="0.214" />
 
     <Button
-        android:id="@+id/announcements"
-        android:layout_width="176dp"
-        android:layout_height="63dp"
-        android:text="お知らせ"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
-
-    <Button
         android:id="@+id/delete"
         android:layout_width="176dp"
         android:layout_height="63dp"
@@ -43,7 +31,7 @@
         app:layout_constraintVertical_bias="0.547" />
 
     <Button
-        android:id="@+id/register"
+        android:id="@+id/attend_register"
         android:layout_width="176dp"
         android:layout_height="63dp"
         android:text="出欠登録"
@@ -53,18 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.665" />
-
-    <Button
-        android:id="@+id/decide"
-        android:layout_width="176dp"
-        android:layout_height="63dp"
-        android:text="イベント確定"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.435" />
 
     <Button
         android:id="@+id/edit"
@@ -90,18 +66,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.098" />
 
-    <Button
-        android:id="@+id/change"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="パスワード変更"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.898" />
-
     <TextView
         android:id="@+id/textView37"
         android:layout_width="wrap_content"
@@ -113,5 +77,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.092" />
+
+    <Button
+        android:id="@+id/decision"
+        android:layout_width="179dp"
+        android:layout_height="62dp"
+        android:text="イベント確定"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.433" />
+
+    <Button
+        android:id="@+id/notice"
+        android:layout_width="171dp"
+        android:layout_height="56dp"
+        android:text="お知らせ"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.77" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

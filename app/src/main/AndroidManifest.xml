@@ -11,11 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AnnouncementsActivity"></activity>
+        <activity android:name=".ReferenceActivity"></activity>
         <activity android:name=".AttendanceRegistrationActivity" />
         <activity android:name=".ParticipatingEventSelectActivity" />
         <activity android:name=".DeleteActivity" />
-        <activity android:name=".NoticeActivity" />
         <activity android:name=".EventEditActivity" />
         <activity android:name=".EventSelectActivity" />
         <activity android:name=".NumberingActivity" />

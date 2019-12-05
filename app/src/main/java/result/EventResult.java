@@ -1,4 +1,4 @@
-package entity;
+package result;
 
 public class EventResult {
     private final int mError;

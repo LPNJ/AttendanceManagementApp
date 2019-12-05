@@ -13,5 +13,4 @@ public class LoginTaskMock implements LoginTask {
             listener.onResult(0);
         }
     }
-
 }

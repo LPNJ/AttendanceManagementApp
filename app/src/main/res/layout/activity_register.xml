@@ -17,7 +17,8 @@
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293" />
+        app:layout_constraintVertical_bias="0.293"
+        android:maxLength="128"/>
 
     <EditText
         android:id="@+id/register_PASS"
@@ -30,7 +31,8 @@
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438" />
+        app:layout_constraintVertical_bias="0.438"
+        android:maxLength="128"/>
 
     <EditText
         android:id="@+id/register_COMFIRMATION_PASS"
@@ -43,7 +45,8 @@
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.577" />
+        app:layout_constraintVertical_bias="0.577"
+        android:maxLength="128"/>
 
     <Button
         android:id="@+id/registration"

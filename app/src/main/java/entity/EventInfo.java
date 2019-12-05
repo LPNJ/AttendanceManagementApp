@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class EventInfo {
+    /**m未定義のイベント番号 */
+    public static final String UNDEFINED_EVENT_NUMBER = "UNDEFINED";
     private final String mEventName;
     private final String mEventDetails;
     private final List<String> mDates;

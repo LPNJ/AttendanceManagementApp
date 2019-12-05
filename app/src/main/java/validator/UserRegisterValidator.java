@@ -61,10 +61,10 @@ public class UserRegisterValidator implements Validator<EditableUserInfo> {
     }
 
     private int validateLength(String value, int min, int max, int minError, int maxError) {
-        if (value.length() > min) {
+        if (value.length() < min) {
             return minError;
         }
-        if (value.length() < max) {
+        if (value.length() > max) {
             return maxError;
         }
         return SUCCESS;
