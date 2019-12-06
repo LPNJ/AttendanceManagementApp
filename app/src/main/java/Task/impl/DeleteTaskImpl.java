@@ -2,14 +2,14 @@ package Task.impl;
 
 import org.json.JSONObject;
 
-import Task.AbstractAsyncTask;
 import Task.DeleteTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import entity.DeleteEventRequest;
+import Task.serialize.DeleteEventRequest;
+import Task.SimpleServerTask;
 
 public class DeleteTaskImpl
-        extends AbstractAsyncTask<DeleteEventRequest, Integer> implements DeleteTask {
+        extends SimpleServerTask<DeleteEventRequest> implements DeleteTask {
 
     DeleteTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.DELETE_EVENT, listener);
@@ -18,11 +18,6 @@ public class DeleteTaskImpl
     @Override
     protected JSONObject createJson(DeleteEventRequest... v) {
         return v[0].toJson();
-    }
-
-    @Override
-    protected Integer parseJson(JSONObject json) {
-        return json.optInt("error", 1);
     }
 
     @Override

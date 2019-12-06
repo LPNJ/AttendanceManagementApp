@@ -2,31 +2,26 @@ package Task.impl;
 
 import org.json.JSONObject;
 
-import Task.AbstractAsyncTask;
+import Task.ServerTask;
 import Task.EventEditTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import entity.EventCreateRequest;
+import Task.serialize.EventCreateRequest;
 import entity.EventInfo;
 import result.EventResult;
 
-public class EventEditTaskImpl extends AbstractAsyncTask<EventInfo, EventResult> implements EventEditTask {
+public class EventEditTaskImpl extends AbstractEditEventTask implements EventEditTask {
     public EventEditTaskImpl(ResultListener listener) {
-        super(ServerRequest.RequestType.EDIT_EVENT, listener);
+        super(listener);
     }
 
     @Override
-    protected JSONObject createJson(EventInfo... v) {
-        return null;
-    }
-
-    @Override
-    protected EventResult parseJson(JSONObject json) {
-        return null;
+    protected JSONObject createJson(EventCreateRequest... v) {
+        return v[0].toJson(EventCreateRequest.CreateType.EDIT);
     }
 
     @Override
     public void execute(EventCreateRequest request, ResultListener listener) {
-
+        super.execute(request);
     }
 }
