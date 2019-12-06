@@ -1,5 +1,7 @@
 package entity;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,6 +10,7 @@ import org.json.JSONObject;
  * ユーザーIDとパスワードを保持する
  */
 public class UserInfo {
+    private static final String TAG = "UserInfo";
     private final String mUserId;
     private final String mPassword;
 
@@ -33,17 +36,7 @@ public class UserInfo {
                     .put("userId", mUserId)
                     .put("password", mPassword);
         } catch (JSONException e) {
-            // 発生しないはず。
-            return null;
-        }
-    }
-
-    public JSONObject toJsonOnlyUserId() {
-        try {
-            return new JSONObject()
-                    .put("userId", mUserId);
-        } catch (JSONException e) {
-            // 発生しないはず。
+            Log.e(TAG, "failed to serialize", e);
             return null;
         }
     }
