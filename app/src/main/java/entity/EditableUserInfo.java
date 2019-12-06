@@ -2,6 +2,7 @@ package entity;
 
 public class EditableUserInfo extends UserInfo {
     private final String mConfirmationPassword;
+
     /**
      * コンストラクタ
      */
