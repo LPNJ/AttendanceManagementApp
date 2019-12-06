@@ -1,11 +1,8 @@
 package Task.mock;
 
 import Task.DeleteTask;
-import Task.EventCreateTask;
 import Task.ResultListener;
-import entity.DeleteEventRequest;
-import entity.EditableUserInfo;
-import entity.EventInfo;
+import Task.serialize.DeleteEventRequest;
 
 public class DeleteTaskMock implements DeleteTask {
 

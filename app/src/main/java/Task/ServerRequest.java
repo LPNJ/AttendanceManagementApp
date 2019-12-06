@@ -37,7 +37,7 @@ public class ServerRequest {
         DELETE_EVENT("event", MethodType.DELETE),
         GET_ALL_EVENT("eventlist", MethodType.GET),
         REGISTER_ATTENDANCE("attendance", MethodType.POST),
-        GET_ALL_ATTEND_EVENT("attendancelist", MethodType.GET);
+        GET_ALL_ATTENDANCE_EVENT("attendancelist", MethodType.GET);
 
         private final String mUrl;
         private final MethodType mMethodType;

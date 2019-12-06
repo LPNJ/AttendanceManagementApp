@@ -2,8 +2,7 @@ package Task.mock;
 
 import Task.EventEditTask;
 import Task.ResultListener;
-import entity.EventCreateRequest;
-import entity.EventInfo;
+import Task.serialize.EventCreateRequest;
 
 public class EventEditTaskMock implements EventEditTask {
 

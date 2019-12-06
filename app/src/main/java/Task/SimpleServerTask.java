@@ -1,4 +1,4 @@
-package Task.serialize;
+package Task;
 
 import org.json.JSONObject;
 

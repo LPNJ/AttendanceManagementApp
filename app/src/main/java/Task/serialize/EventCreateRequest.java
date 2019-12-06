@@ -8,51 +8,35 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import Task.ServerRequest;
 import entity.CandidateDate;
 import entity.EventInfo;
 
 public class EventCreateRequest {
-    enum EventType {
-        CREATE, EDIT
+    public enum CreateType {
+        CREATE, EDIT;
     }
     private static String SEPARATE_WORD = "#";
     private final String mUserId;
     // 変更の時のみEventIDを指定する。
     private final EventInfo mEventInfo;
-    private final EventType mType;
 
     /**
      *
      * @param userId
      * @param eventInfo
      */
-    public EventCreateRequest(String userId, EventInfo eventInfo, EventType type) {
+    public EventCreateRequest(String userId, EventInfo eventInfo) {
         mUserId = userId;
         mEventInfo = eventInfo;
-        mType = type;
     }
 
-    public JSONObject toJson() {
-
+    public JSONObject toJson(CreateType type) {
         try {
-            List<JSONObject> dates = new ArrayList<>();
-            for (CandidateDate date : mEventInfo.getCandidateDates()) {
-                for ()
-                JSONObject json = new JSONObject()
-                        .put("date", date.getDate())
-                        .put("time", date.getTime())
-                        .put("")
-                dates.add(json);
-            }
-            JSONObject data = new JSONObject()
-                .put("eventName", mEventInfo.getEventName())
-                .put("eventDetail", mEventInfo.getEventDetails())
-                .put("candidateDates", dates);
-
             JSONObject request = new JSONObject()
                     .put("userId", mUserId)
-                    .put("data", data);
-            if (mType == EventType.EDIT) {
+                    .put("data", mEventInfo.toJson());
+            if (type == CreateType.EDIT) {
                 request.put("eventId", mEventInfo.getEventId());
             }
             return request;
@@ -60,7 +44,6 @@ public class EventCreateRequest {
             Log.i("EveCreReq", "serialize error.", e);
             return null;
         }
-        return null;
     }
 
 

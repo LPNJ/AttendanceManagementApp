@@ -4,14 +4,14 @@ import android.os.AsyncTask;
 import org.json.JSONObject;
 import java.io.IOException;
 
-public abstract class AbstractAsyncTask<V, R> extends AsyncTask<V, Void, JSONObject> {
+public abstract class ServerTask<V, R> extends AsyncTask<V, Void, JSONObject> {
     private final ServerRequest.RequestType mRequestType;
     private final ResultListener mListener;
     /**
      * 子クラスはpublicにしよう
      * @param listener
      */
-    protected AbstractAsyncTask(ServerRequest.RequestType type, ResultListener listener) {
+    protected ServerTask(ServerRequest.RequestType type, ResultListener listener) {
         mRequestType = type;
         mListener = listener;
     }

@@ -1,5 +1,8 @@
 package entity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +16,8 @@ public class CandidateDate {
     private final List<AttendanceInfo> mAttendanceInfoList; //参加者一覧
 
     public CandidateDate(String date, String time) {
-        mDate = date;
-        mTime = time;
+        mDate = date.trim();
+        mTime = time.trim();
         mAttendanceInfoList = new ArrayList<>();
     }
 
@@ -65,5 +68,25 @@ public class CandidateDate {
             }
         }
         return names;
+    }
+
+    public int getAttendanceType(String userId) {
+        for (AttendanceInfo info : mAttendanceInfoList) {
+            if (userId.equals(info.getAttendanceName())) {
+                return info.getStatus();
+            }
+        }
+        return AttendanceType.ABSENCE.toInt();
+    }
+
+    public JSONObject toJson() throws JSONException {
+//        List<JSONObject> attendances = new ArrayList<>();
+//        for (AttendanceInfo info : mAttendanceInfoList) {
+//            attendances.add(info.toJson());
+//        }
+        return new JSONObject()
+                .put("date", mDate)
+                .put("time", mTime);
+//                .put("attendanceInfo", attendances);
     }
 }

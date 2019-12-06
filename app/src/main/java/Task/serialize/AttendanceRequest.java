@@ -3,6 +3,10 @@ package Task.serialize;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import entity.CandidateDate;
 import entity.EventInfo;
 
 
@@ -14,30 +18,34 @@ import entity.EventInfo;
  *   }
  */
 public class AttendanceRequest {
+    private final String mEventId;
     private final String mUserId;
-    private final EventInfo mEventInfo;
+    private final List<CandidateDate> mCandidates;
 
     public AttendanceRequest(
-            String userId, EventInfo eventInfo) {
+            String userId, String eventId, List<CandidateDate> candidateDates) {
+        mEventId = eventId;
         mUserId = userId;
-        mEventInfo = eventInfo;
+        mCandidates = candidateDates;
     }
 
     public JSONObject toJson() {
         try {
-            JSONObject data = new JSONObject()
-                    .put("date", mDate)
-                    .put("time", mTime)
-                    .put("status", mStatus);
+            List<JSONObject> jsons = new ArrayList<>();
+            for (CandidateDate date : mCandidates) {
+                JSONObject jsonObj = new JSONObject()
+                        .put("date", date.getDate())
+                        .put("time", date.getTime())
+                        .put("status", date.getAttendanceType(mUserId));
+                jsons.add(jsonObj);
+            }
             return new JSONObject()
                     .put("userId", mUserId)
                     .put("eventId", mEventId)
-                    .put("data", data.toString());
+                    .put("data", new JSONObject().put("candidates", jsons));
         } catch (JSONException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
-
-
 }

@@ -1,12 +1,16 @@
 package Task.impl;
 
-import android.os.AsyncTask;
+import Task.EventSelectTask;
+import Task.ResultListener;
+import Task.ServerRequest;
 
-import entity.EventInfo;
+public class EventSelectTaskImpl extends AbstractSelectEventTask implements EventSelectTask {
+    public EventSelectTaskImpl(ResultListener listener) {
+        super(ServerRequest.RequestType.GET_ALL_EVENT, listener);
+    }
 
-public class EventSelectTaskImpl extends AsyncTask<EventInfo,Integer,Integer> {
     @Override
-    protected Integer doInBackground(EventInfo... eventInfo) {
-        return null;
+    public void execute(String userId, ResultListener listener) {
+        super.execute(userId);
     }
 }
