@@ -10,7 +10,7 @@ public class EventInfo {
     public static final String UNDEFINED_EVENT_NUMBER = "UNDEFINED";
     private String mEventName;  // イベント名
     private String mEventDetails;  // イベント詳細
-    private final String mEventNumber;  // イベントID（番号）
+    private String mEventNumber;  // イベントID（番号）
     private final List<CandidateDate> mCandidateDates; // 候補日一覧
 
     /**
@@ -25,6 +25,10 @@ public class EventInfo {
 
     public void addCandidateDate(CandidateDate date) {
         mCandidateDates.add(date);
+    }
+
+    public void setEventNumber(String eventNumber) {
+        mEventNumber = eventNumber;
     }
 
     public String getEventName() {

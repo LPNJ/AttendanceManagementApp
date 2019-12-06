@@ -1,5 +1,8 @@
 package entity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * 参加者の情報
  */
@@ -27,6 +30,12 @@ public class AttendanceInfo {
      */
     public int getStatus() {
         return mType.toInt();
+    }
+
+    public JSONObject toJson() throws JSONException {
+        return new JSONObject()
+                .put("attendanceName", mAttendanceName)
+                .put("status", mType.mStatus);
     }
 
 }
