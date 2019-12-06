@@ -16,7 +16,7 @@ public class ParticipantEventTaskImpl
         extends ServerTask<String,Integer> implements ParticipantEventTask {
 
     ParticipantEventTaskImpl(ResultListener listener) {
-        super(ServerRequest.RequestType.GET_ALL_ATTEND_EVENT, listener);
+        super(ServerRequest.RequestType.GET_ALL_ATTENDANCE_EVENT, listener);
     }
 
     @Override
