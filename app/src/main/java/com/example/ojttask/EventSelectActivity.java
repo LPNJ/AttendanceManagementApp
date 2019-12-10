@@ -72,8 +72,9 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // TODO メンバ変数に設定したList＜EventInfo＞からpositionのEventInfoを取得する
-
+//        LIstview lIstview = ()
         // TODO 前画面の情報をもとに次の画面に遷移する
         // TODO EventInfoからJsonを取得してintentに設定する。
+
     }
 }

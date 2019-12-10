@@ -12,9 +12,10 @@ import entity.CandidateDate;
 import entity.EventInfo;
 
 public class EventCreateRequest {
-    enum EventType {
+    public enum EventType {
         CREATE, EDIT
     }
+
     private static String SEPARATE_WORD = "#";
     private final String mUserId;
     // 変更の時のみEventIDを指定する。
@@ -22,7 +23,6 @@ public class EventCreateRequest {
     private final EventType mType;
 
     /**
-     *
      * @param userId
      * @param eventInfo
      */
@@ -62,6 +62,4 @@ public class EventCreateRequest {
         }
         return null;
     }
-
-
 }

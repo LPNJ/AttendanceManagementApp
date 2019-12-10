@@ -1,4 +1,7 @@
 package Task;
 
-public interface EventCreateTask extends Executor<EventCreateTask> {
+import Task.serialize.EventCreateRequest;
+
+public interface EventCreateTask extends Executor<EventCreateRequest>{
+        //Executor<EventCreateTask> {
 }

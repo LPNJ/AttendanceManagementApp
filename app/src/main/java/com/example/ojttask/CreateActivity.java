@@ -23,7 +23,7 @@ import Picker.TimePickerFragment;
 import Task.EventCreateTask;
 import Task.ResultListener;
 import Task.mock.EventCreateTaskMock;
-import entity.EventCreateRequest;
+import Task.serialize.EventCreateRequest;
 import entity.EventInfo;
 import result.EventCreateResult;
 
@@ -84,8 +84,9 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                     break;
 
                     case R.id.registration_create: {
-                        EventInfo ei = new EventInfo("","",dates,times, EventInfo.UNDEFINED_EVENT_NUMBER);
-                        mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
+                        //EventInfo ei = new EventInfo("","",dates,times, EventInfo.UNDEFINED_EVENT_NUMBER);
+                        EventInfo ei = new EventInfo("","",EventInfo.UNDEFINED_EVENT_NUMBER,dates);
+                        mEventCreateTask.execute(new EventCreateRequest("",ei, EventCreateRequest.EventType.CREATE), CreateActivity.this);
                         for(String date : dates){
                             Log.i("DATE", date);
                         }
