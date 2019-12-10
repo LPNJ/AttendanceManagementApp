@@ -6,7 +6,7 @@ import Task.AbstractAsyncTask;
 import Task.AttendanceRegistrationTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import entity.AttendanceRequest;
+import Task.serialize.AttendanceRequest;
 
 public class AttendanceRegistrationTaskImpl extends AbstractAsyncTask<AttendanceRequest, Integer>
         implements AttendanceRegistrationTask {

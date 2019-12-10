@@ -1,11 +1,12 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * イベント情報
  */
-public class EventInfo {
+public class EventInfo implements Serializable {
     /**未定義のイベント番号 */
     public static final String UNDEFINED_EVENT_NUMBER = "UNDEFINED";
     private String mEventName;  // イベント名
@@ -16,7 +17,7 @@ public class EventInfo {
     /**
      * コンストラクタ
      */
-    public EventInfo(String eventName, String eventDetail, String eventNumber, List candidateDate) {
+    public EventInfo(String eventName, String eventDetail, String eventNumber, List<CandidateDate> candidateDate) {
         mEventName = eventName;
         mEventDetails = eventDetail;
         mEventNumber = eventNumber;

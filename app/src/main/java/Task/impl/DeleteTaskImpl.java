@@ -6,10 +6,9 @@ import Task.AbstractAsyncTask;
 import Task.DeleteTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import entity.DeleteEventRequest;
+import Task.serialize.DeleteEventRequest;
 
-public class DeleteTaskImpl
-        extends AbstractAsyncTask<DeleteEventRequest, Integer> implements DeleteTask {
+public class DeleteTaskImpl extends AbstractAsyncTask<DeleteEventRequest, Integer> implements DeleteTask {
 
     DeleteTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.DELETE_EVENT, listener);

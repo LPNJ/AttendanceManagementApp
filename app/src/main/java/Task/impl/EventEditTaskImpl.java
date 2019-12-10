@@ -6,7 +6,7 @@ import Task.AbstractAsyncTask;
 import Task.EventEditTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import entity.EventCreateRequest;
+import Task.serialize.EventCreateRequest;
 import entity.EventInfo;
 import result.EventResult;
 

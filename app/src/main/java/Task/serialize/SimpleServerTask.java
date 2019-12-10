@@ -2,11 +2,11 @@ package Task.serialize;
 
 import org.json.JSONObject;
 
+import Task.AbstractAsyncTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import Task.ServerTask;
 
-public abstract class SimpleServerTask<V> extends ServerTask<V, Integer> {
+public abstract class SimpleServerTask<V> extends AbstractAsyncTask<V, Integer> {
     /**
      * 子クラスはpublicにしよう
      * @param listener

@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".AttendanceRegistrationActivity">
 
+    <EditText
+        android:id="@+id/event_attendance_name"
+        android:layout_width="125dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
+
     <TextView
         android:id="@+id/textView26"
         android:layout_width="90dp"
@@ -13,23 +26,10 @@
         android:text="ユーザー名"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
-
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="125dp"
-        android:layout_height="44dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.312" />
+        app:layout_constraintVertical_bias="0.308" />
 
     <TextView
         android:id="@+id/textView32"
@@ -44,7 +44,7 @@
         app:layout_constraintVertical_bias="0.185" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/event_attendance_reference"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="参照"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.692" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/event_attendance_decision"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="確定"

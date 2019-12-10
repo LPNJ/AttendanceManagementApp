@@ -2,8 +2,7 @@ package Task.mock;
 
 import Task.AttendanceRegistrationTask;
 import Task.ResultListener;
-import entity.AttendanceRequest;
-import entity.EditableUserInfo;
+import Task.serialize.AttendanceRequest;
 
 public class AttendanceRegistrationMock implements AttendanceRegistrationTask {
 
