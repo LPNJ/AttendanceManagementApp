@@ -16,13 +16,13 @@ public class EventCreateRequest {
     public enum CreateType {
         CREATE, EDIT;
     }
+
     private static String SEPARATE_WORD = "#";
     private final String mUserId;
     // 変更の時のみEventIDを指定する。
     private final EventInfo mEventInfo;
 
     /**
-     *
      * @param userId
      * @param eventInfo
      */
@@ -45,6 +45,4 @@ public class EventCreateRequest {
             return null;
         }
     }
-
-
 }

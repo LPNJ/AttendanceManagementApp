@@ -10,7 +10,6 @@ import android.view.View;
 import Task.AttendanceRegistrationTask;
 import Task.ResultListener;
 import Task.mock.AttendanceRegistrationMock;
-import entity.AttendanceRequest;
 import entity.UserInfo;
 import validator.UserLoginValidator;
 

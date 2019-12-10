@@ -18,7 +18,6 @@ import Picker.TimePickerFragment;
 import Task.AttendanceRegistrationTask;
 import Task.ResultListener;
 import Task.mock.EventSelectTaskMock;
-import entity.EventCreateRequest;
 import entity.EventInfo;
 import entity.UserID;
 import result.EventSelectResult;
@@ -55,6 +54,7 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
             switch (v.getId()) {
                 case R.id.registration_participating: {
                     Intent intent = new Intent(ParticipatingEventSelectActivity.this, AttendanceRegistrationActivity.class);
+//                    intent.putExtra(IntentKey.REFERENCE_EVENT);
                     startActivity(intent);
                 }
                 break;
