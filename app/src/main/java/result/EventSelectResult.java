@@ -14,12 +14,13 @@ public class EventSelectResult {
         mEventInfoList = eventInfoList;
     }
 
-    public List getEventNameList() {
+    public List<String> getEventNameList() {
         List<String> eventNameList = new ArrayList<>();
-        for(int i = 0 ; i < mEventInfoList.size() ; i++){
-            EventInfo eventInfo = mEventInfoList.get(i);
-            String eventName = eventInfo.getEventName();
-            eventNameList.add(eventName);
+        if (mEventInfoList == null) {
+            return eventNameList;
+        }
+        for(EventInfo eventInfo : mEventInfoList){
+            eventNameList.add(eventInfo.getEventName());
         }
         return eventNameList;
     }

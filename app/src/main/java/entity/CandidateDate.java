@@ -3,6 +3,7 @@ package entity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * 候補日
  */
-public class CandidateDate {
+public class CandidateDate implements Serializable {
     private final String mDate; // 日付
     private final String mTime; // 時間
     private final List<AttendanceInfo> mAttendanceInfoList; //参加者一覧

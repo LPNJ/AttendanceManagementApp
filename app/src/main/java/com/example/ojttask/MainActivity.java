@@ -12,6 +12,7 @@ import android.widget.EditText;
 import Task.LoginTask;
 import Task.ResultListener;
 import Task.mock.LoginTaskMock;
+import entity.LoginUser;
 import entity.UserInfo;
 import validator.UserLoginValidator;
 
@@ -43,32 +44,27 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
     }
 
     class MainActivityOnClickListener implements View.OnClickListener {
-
         @Override
         public void onClick(View v) {
-
             switch (v.getId()) {
                 case R.id.newAccount: {
                     Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
                     startActivity(intent);
                 }
                 break;
-
                 case R.id.login: {
-
                     mId_info = mId.getText().toString();
                     mPass_info = mPass.getText().toString();
-
-                    int n = new UserLoginValidator().validate(new UserInfo(mId_info,mPass_info));
-
-                    if(n == 1){
+                    int validationResult = new UserLoginValidator().validate(new UserInfo(mId_info,mPass_info));
+                    if(validationResult == 1){
                         new AlertDialog.Builder(MainActivity.this)
                                 .setMessage(R.string.login_error)
                                 .setPositiveButton(R.string.ok, null)
                                 .create()
                                 .show();
-                    }
-                    else {
+                    } else {
+                        LoginUser loginUser = LoginUser.getInstance();
+                        loginUser.setLoginUserId(mId_info);
                         mLoginTask.execute(new UserInfo(mId_info, mPass_info),MainActivity.this);
                     }
                 }
@@ -84,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
 
         mId = findViewById(R.id.editText_ID);
         mPass = findViewById(R.id.editText_PASS);
-
         mRegister = findViewById(R.id.newAccount);
         mLogin = findViewById(R.id.login);
 

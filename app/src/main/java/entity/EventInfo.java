@@ -6,12 +6,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * イベント情報
  */
-public class EventInfo {
+public class EventInfo implements Serializable {
     public enum EventStatus {
         WORKING(0), DECIDED(1),DELETED(2);
         final int mStatus;
@@ -54,7 +56,7 @@ public class EventInfo {
     /**
      * コンストラクタ
      */
-    public EventInfo(String eventName, String eventDetail, String eventNumber, List candidateDate) {
+    public EventInfo(String eventName, String eventDetail, String eventNumber, List<CandidateDate> candidateDate) {
         mEventName = eventName;
         mEventDetails = eventDetail;
         mEventNumber = eventNumber;

@@ -12,13 +12,12 @@ import Task.SimpleServerTask;
 
 public class LogoutTaskImpl extends SimpleServerTask<String> implements LogoutTask {
 
-    public static final String TAG = "LogoutTask";
+    private static final String TAG = "LogoutTask";
 
-    public LogoutTaskImpl(ResultListener listener) {
-        super(ServerRequest.RequestType.LOGOUT, listener);
+    public LogoutTaskImpl(ServerRequest.RequestType type, ResultListener listener) {
+        super(type, listener);
     }
 
-    @Override
     public void execute(String userInfo, ResultListener listener) {
         super.execute(userInfo);
     }

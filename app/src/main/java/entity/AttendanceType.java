@@ -36,7 +36,7 @@ public enum  AttendanceType {
         return ABSENCE;
     }
 
-    int toInt() {
+    public int toInt() {
         return mStatus;
     }
 }

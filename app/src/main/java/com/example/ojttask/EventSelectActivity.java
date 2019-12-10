@@ -8,17 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import Task.ResultListener;
 import Task.mock.EventSelectTaskMock;
-import entity.EventCreateRequest;
-import entity.EventInfo;
-import entity.UserID;
+import entity.LoginUser;
 import result.EventSelectResult;
 
 public class EventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResult>, AdapterView.OnItemClickListener {
@@ -30,7 +26,7 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
      */
     public EventSelectActivity() {
         mEventSelectTask = new EventSelectTaskMock();
-        Log.i("Menu","menu activity contstructor");
+        Log.i("Menu","menu activity constructor");
     }
 
     @Override
@@ -43,10 +39,7 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
         // TODO 前画面の情報をメンバ変数に設定する
         int id_info = intent.getIntExtra("screen_info", 0);
         Log.i("Menu", id_info +  "");
-
-        UserID id = new UserID();
-        id.setUserID("komi");
-        mEventSelectTask.execute(id.getUserId(), EventSelectActivity.this);
+        mEventSelectTask.execute(LoginUser.getInstance().getLoginUserId(), EventSelectActivity.this);
     }
 
     @Override

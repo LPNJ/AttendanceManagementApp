@@ -2,9 +2,9 @@ package validator;
 
 import entity.EventInfo;
 
-public abstract class EventCreateVaridator implements Validator<EventInfo> {
+public abstract class EventCreateValidator implements Validator<EventInfo> {
 
-    public static final int ERROR_NOT_INPUT = 1;
+    private static final int ERROR_NOT_INPUT = 1;
 
     // 入力長の閾値
     private static final int MAX_EVENTNAME_LENGTH = 50;
@@ -15,9 +15,7 @@ public abstract class EventCreateVaridator implements Validator<EventInfo> {
     @Override
     public int validate(EventInfo data) {
         // 入力がない
-        if (data.getEventName() == null || data.getDate() == null ||
-                data.getTime().isEmpty() ) {
-
+        if (data.getEventName() == null || data.getEventName().isEmpty() || data.getCandidateDates().isEmpty()) {
             return ERROR_NOT_INPUT;
         }
 

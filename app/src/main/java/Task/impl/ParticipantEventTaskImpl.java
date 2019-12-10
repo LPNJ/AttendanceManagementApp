@@ -6,19 +6,17 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Task.ServerTask;
+import Task.AbstractAsyncTask;
 import Task.ParticipantEventTask;
 import Task.ResultListener;
 import Task.ServerRequest;
-import entity.UserInfo;
 
-public class ParticipantEventTaskImpl
-        extends ServerTask<String,Integer> implements ParticipantEventTask {
+import entity.EventInfo;
 
+public class ParticipantEventTaskImpl extends AbstractAsyncTask<String, Integer> implements ParticipantEventTask {
     ParticipantEventTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.GET_ALL_ATTENDANCE_EVENT, listener);
     }
-
     @Override
     protected JSONObject createJson(String... v) {
         try {
@@ -36,7 +34,7 @@ public class ParticipantEventTaskImpl
     }
 
     @Override
-    public void execute(String userInfo, ResultListener listener) {
-        super.execute(userInfo);
+    public void execute(String s, ResultListener listener) {
+
     }
 }
