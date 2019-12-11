@@ -179,7 +179,7 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                     break;
                 case R.id.registration_create: {
                     EventInfo ei = new EventInfo("","",EventInfo.UNDEFINED_EVENT_NUMBER, dates);
-                    mEventCreateTask.execute(new EventCreateRequest("",ei, EventCreateRequest.OperationType.CREATE), CreateActivity.this);
+                    mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
                     for(CandidateDate date : dates){
                         Log.i("DATE", date.getDateAndTime());
                     }

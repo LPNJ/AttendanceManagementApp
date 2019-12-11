@@ -6,14 +6,12 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Task.AbstractAsyncTask;
+import Task.ServerTask;
 import Task.ParticipantEventTask;
 import Task.ResultListener;
 import Task.ServerRequest;
 
-import entity.EventInfo;
-
-public class ParticipantEventTaskImpl extends AbstractAsyncTask<String, Integer> implements ParticipantEventTask {
+public class ParticipantEventTaskImpl extends ServerTask<String, Integer> implements ParticipantEventTask {
     ParticipantEventTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.GET_ALL_ATTENDANCE_EVENT, listener);
     }

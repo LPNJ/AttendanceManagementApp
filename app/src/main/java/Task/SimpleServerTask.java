@@ -2,7 +2,7 @@ package Task;
 
 import org.json.JSONObject;
 
-public abstract class SimpleServerTask<V> extends AbstractAsyncTask<V, Integer> {
+public abstract class SimpleServerTask<V> extends ServerTask<V, Integer> {
     /**
      * 子クラスはpublicにしよう
      * @param listener

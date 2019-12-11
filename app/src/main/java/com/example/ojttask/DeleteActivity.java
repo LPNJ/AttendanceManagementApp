@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.serialize.EventCreateRequest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -23,8 +24,6 @@ import entity.EventInfo;
 import entity.LoginUser;
 
 public class DeleteActivity extends AppCompatActivity implements ResultListener<Integer> , View.OnClickListener {
-    // TODO DeleteTask を宣言する
-
     /** 新規登録用ボタン */
     private Button mOk;
     /** ログイン用ボタン */
@@ -85,12 +84,8 @@ public class DeleteActivity extends AppCompatActivity implements ResultListener<
 
         switch (v.getId()) {
             case R.id.ok_delete: {
-                // TODO DeleteTaskのexecuteを実施する,
-                LoginUser luser = LoginUser.getInstance();
-                mDeleteTask.execute(new DeleteEventRequest(luser.getLoginUserId(),mEventInfo.getEventId()), DeleteActivity.this);
-                // 引数に指定するEventIdはmEventInfoから取得
-                // UserIdはLoginUserクラスから取得
-
+                LoginUser user = LoginUser.getInstance();
+                mDeleteTask.execute(new EventCreateRequest(user.getLoginUserId(), mEventInfo), DeleteActivity.this);
             }
             break;
 

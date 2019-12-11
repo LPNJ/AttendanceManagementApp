@@ -1,6 +1,6 @@
 package Task;
 
-import Task.serialize.DeleteEventRequest;
+import Task.serialize.EventCreateRequest;
 
-public interface DeleteTask extends Executor<DeleteEventRequest> {
+public interface DeleteTask extends Executor<EventCreateRequest> {
 }
