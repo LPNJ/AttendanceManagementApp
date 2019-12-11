@@ -12,7 +12,8 @@ public class LoginUser {
     /**
      * シングルトンなので private
      */
-    private LoginUser() {}
+    private LoginUser() {
+    }
 
     /**
      * ログインユーザー情報インスタンスを取得する

@@ -86,7 +86,8 @@ public class DeleteActivity extends AppCompatActivity implements ResultListener<
         switch (v.getId()) {
             case R.id.ok_delete: {
                 // TODO DeleteTaskのexecuteを実施する,
-                mDeleteTask.execute(new DeleteEventRequest("komi","0011"), DeleteActivity.this);
+                LoginUser luser = LoginUser.getInstance();
+                mDeleteTask.execute(new DeleteEventRequest(luser.getLoginUserId(),mEventInfo.getEventId()), DeleteActivity.this);
                 // 引数に指定するEventIdはmEventInfoから取得
                 // UserIdはLoginUserクラスから取得
 
