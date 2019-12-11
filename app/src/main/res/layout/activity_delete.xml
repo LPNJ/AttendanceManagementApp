@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.122" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/ok_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OK"
@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.405" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/cancel_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
@@ -55,7 +55,7 @@
         app:layout_constraintVertical_bias="0.405" />
 
     <TextView
-        android:id="@+id/textView44"
+        android:id="@+id/event_name_delete"
         android:layout_width="88dp"
         android:layout_height="29dp"
         app:layout_constraintBottom_toBottomOf="parent"
