@@ -3,10 +3,12 @@ package entity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+
 /**
  * 参加者の情報
  */
-public class AttendanceInfo {
+public class AttendanceInfo implements Serializable {
     private final String mAttendanceName; // 名前
     private final AttendanceType mType;  // 状況
 

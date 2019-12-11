@@ -22,6 +22,6 @@ public class AttendanceRegistrationTaskImpl extends SimpleServerTask<AttendanceR
 
     @Override
     public void execute(AttendanceRequest request, ResultListener listener) {
-        execute(request);
+        super.execute(request);
     }
 }

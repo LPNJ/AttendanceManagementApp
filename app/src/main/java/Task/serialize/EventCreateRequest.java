@@ -12,19 +12,27 @@ import Task.ServerRequest;
 import entity.CandidateDate;
 import entity.EventInfo;
 
+/**
+ * サーバーに送る形式のイベント作成のリクエスト
+ */
 public class EventCreateRequest {
+    /**
+     * 操作の種類
+     */
     public enum CreateType {
         CREATE, EDIT;
     }
-    private static String SEPARATE_WORD = "#";
+    /** ログに出力するタグ名 */
+    private static final String TAG = EventCreateRequest.class.getSimpleName();
+
     private final String mUserId;
     // 変更の時のみEventIDを指定する。
     private final EventInfo mEventInfo;
 
     /**
-     *
-     * @param userId
-     * @param eventInfo
+     * コンストラクタ
+     * @param userId ユーザーID
+     * @param eventInfo イベント情報
      */
     public EventCreateRequest(String userId, EventInfo eventInfo) {
         mUserId = userId;
@@ -41,10 +49,8 @@ public class EventCreateRequest {
             }
             return request;
         } catch (JSONException e) {
-            Log.i("EveCreReq", "serialize error.", e);
+            Log.i(TAG, "serialize error.", e);
             return null;
         }
     }
-
-
 }

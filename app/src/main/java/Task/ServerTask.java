@@ -4,6 +4,11 @@ import android.os.AsyncTask;
 import org.json.JSONObject;
 import java.io.IOException;
 
+/**
+ * 全タスククラスの基底となる抽象クラス
+ * @param <V>
+ * @param <R>
+ */
 public abstract class ServerTask<V, R> extends AsyncTask<V, Void, JSONObject> {
     private final ServerRequest.RequestType mRequestType;
     private final ResultListener mListener;
