@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.serialize.EventCreateResponse;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -29,9 +30,8 @@ import Task.serialize.EventCreateRequest;
 import entity.CandidateDate;
 import entity.EventInfo;
 import entity.LoginUser;
-import result.EventCreateResult;
 
-public class EventEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResult>{
+public class EventEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResponse>{
     /** 時間を入力するテキストビューのID一覧 */
     private static final List<Integer> TIME_TEXTVIEW_ID_LIST = Collections.unmodifiableList(Arrays.asList(
             new Integer[] {
@@ -119,7 +119,7 @@ public class EventEditActivity extends AppCompatActivity implements DatePickerDi
     }
 
     @Override
-    public void onResult(EventCreateResult result) {
+    public void onResult(EventCreateResponse result) {
         if (result == null) {
             throw new IllegalArgumentException("result is null");
         }
@@ -196,7 +196,7 @@ public class EventEditActivity extends AppCompatActivity implements DatePickerDi
                     break;
                 case R.id.registration_edit: {
                     updateEventInfo();
-                    mEventCreateTask.execute(new EventCreateRequest(LoginUser.getInstance().getLoginUserId(), mEventInfo, EventCreateRequest.OperationType.EDIT), EventEditActivity.this);
+                    mEventCreateTask.execute(new EventCreateRequest(LoginUser.getInstance().getLoginUserId(), mEventInfo), EventEditActivity.this);
                     for(CandidateDate date : dates){
                         Log.i("DATE", date.getDateAndTime());
                     }

@@ -11,30 +11,17 @@ public class EventSelectResponse {
     private final List<EventInfo> mDecidedEvents;
     private final List<EventInfo> mWorkingEvents;
 
-    public EventSelectResponse(int error) {
+    public EventSelectResponse(int error, List<EventInfo> eventInfoList) {
         mError = error;
         mDecidedEvents = new ArrayList<>();
         mDeletedEvents = new ArrayList<>();
         mWorkingEvents = new ArrayList<>();
+        for (EventInfo info : eventInfoList) {
+            addEventInfo(info);
+        }
     }
 
-    public int getError() {
-        return mError;
-    }
-
-    public List<EventInfo> getWorkingEvents() {
-        return mWorkingEvents;
-    }
-
-    public List<EventInfo> getDeletedEvents() {
-        return mDeletedEvents;
-    }
-
-    public List<EventInfo> getDecidedEvents() {
-        return mDecidedEvents;
-    }
-
-    public void addEventInfo(EventInfo eventInfo) {
+    private void addEventInfo(EventInfo eventInfo) {
         switch (eventInfo.getEventStatus()) {
             case WORKING:
                 mWorkingEvents.add(eventInfo);
@@ -48,4 +35,28 @@ public class EventSelectResponse {
 
         }
     }
+
+    public int getError() {
+        return mError;
+    }
+
+    public List<String> getWorkingEventNames() {
+        List<String> names = new ArrayList<>();
+        for (EventInfo info : mWorkingEvents) {
+            names.add(info.getEventName());
+        }
+        return names;
+    }
+
+    public List<EventInfo> getWorkingEvents() {
+        return mWorkingEvents;
+    }
+
+//    public List<EventInfo> getDeletedEvents() {
+//        return mDeletedEvents;
+//    }
+//
+//    public List<EventInfo> getDecidedEvents() {
+//        return mDecidedEvents;
+//    }
 }

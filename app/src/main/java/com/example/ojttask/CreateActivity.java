@@ -27,9 +27,9 @@ import Task.mock.EventCreateTaskMock;
 import Task.serialize.EventCreateRequest;
 import entity.CandidateDate;
 import entity.EventInfo;
-import result.EventCreateResult;
+import Task.serialize.EventCreateResponse;
 
-public class CreateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResult> {
+public class CreateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResponse> {
     /** 時間を入力するテキストビューのID一覧 */
     private static final List<Integer> TIME_TEXTVIEW_ID_LIST = Collections.unmodifiableList(Arrays.asList(
             new Integer[] {
@@ -97,7 +97,7 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
     }
 
     @Override
-    public void onResult(EventCreateResult result) {
+    public void onResult(EventCreateResponse result) {
         if (result == null) {
             throw new IllegalArgumentException("result is null");
         }

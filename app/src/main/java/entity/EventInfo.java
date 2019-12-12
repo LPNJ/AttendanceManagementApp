@@ -117,7 +117,6 @@ public class EventInfo implements Serializable {
         mCandidateDates.remove(removeDate);
     }
 
-<<<<<<< Updated upstream
     public void addAttendanceTo(String date, String time, AttendanceInfo info) {
         String trimmedDateTime = date.trim() + " " + time.trim();
         for (CandidateDate candidate : mCandidateDates) {
@@ -177,7 +176,8 @@ public class EventInfo implements Serializable {
             }
         }
         return eventInfo;
-=======
+    }
+
     /**
      * 引数の日付と時間を持った{@link CandidateDate}を削除します。
      * @param dateTimes
@@ -214,6 +214,5 @@ public class EventInfo implements Serializable {
             }
         }
         return null;
->>>>>>> Stashed changes
     }
 }

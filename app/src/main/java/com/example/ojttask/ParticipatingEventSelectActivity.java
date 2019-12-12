@@ -1,6 +1,7 @@
 package com.example.ojttask;
 
 import Task.mock.ParticipantEventSelectTaskMock;
+import Task.serialize.EventSelectResponse;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,14 +16,12 @@ import android.widget.ListView;
 import java.util.List;
 
 import Task.ResultListener;
-import entity.EventInfo;
 import entity.LoginUser;
-import result.EventSelectResult;
 
 /***
  * 出欠登録をするイベント選択をする画面
  */
-public class ParticipatingEventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResult> {
+public class ParticipatingEventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResponse> {
     /** ログに出力するタグ名 */
     private static final String TAG = ParticipatingEventSelectActivity.class.getSimpleName();
     /** イベントを選択・出欠の内容を入力するタスク */
@@ -48,14 +47,14 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
     }
 
     @Override
-    public void onResult(final EventSelectResult result) {
+    public void onResult(final EventSelectResponse result) {
         if (result == null) {
             throw new IllegalArgumentException("result is null");
         }
         if (result.getError() != 0) {
             return;
         }
-        List<String> eventNameList = result.getEventNameList();
+        List<String> eventNameList = result.getWorkingEventNames();
         ListView events = findViewById(R.id.event_list_participating);
         // simple_list_item_1 は、 もともと用意されている定義済みのレイアウトファイルのID
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, eventNameList);
@@ -64,7 +63,7 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ParticipatingEventSelectActivity.this, AttendanceRegistrationActivity.class);
-                intent.putExtra(IntentKey.REFERENCE_EVENT,  result.getEventInfoList().get((int) l));
+                intent.putExtra(IntentKey.REFERENCE_EVENT,  result.getWorkingEvents().get((int) l));
                 startActivity(intent);
             }
         });

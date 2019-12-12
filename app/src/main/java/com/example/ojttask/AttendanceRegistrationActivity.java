@@ -136,7 +136,9 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
                     startActivity(intent);
                     break;
                 case R.id.event_attendance_decision: {
-                    mAttendanceRegistrationTask.execute(new AttendanceRequest(LoginUser.getInstance().getLoginUserId(), mEventInfo), AttendanceRegistrationActivity.this);
+                    mAttendanceRegistrationTask.execute(
+                            new AttendanceRequest(LoginUser.getInstance().getLoginUserId(), mEventInfo.getEventId(),
+                                    mEventInfo.getCandidateDates()), AttendanceRegistrationActivity.this);
                     break;
                 }
             }

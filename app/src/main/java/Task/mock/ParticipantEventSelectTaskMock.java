@@ -5,11 +5,11 @@ import java.util.List;
 
 import Task.EventSelectTask;
 import Task.ResultListener;
+import Task.serialize.EventSelectResponse;
 import entity.AttendanceInfo;
 import entity.AttendanceType;
 import entity.CandidateDate;
 import entity.EventInfo;
-import result.EventSelectResult;
 
 public class ParticipantEventSelectTaskMock implements EventSelectTask {
     @Override
@@ -18,7 +18,7 @@ public class ParticipantEventSelectTaskMock implements EventSelectTask {
         eventList.add(new EventInfo("忘年会(参加)", "", null,  createMockedDate(1)));
         eventList.add(new EventInfo("新年会(参加)", "", null,  createMockedDate(2)));
         eventList.add(new EventInfo("同期会(参加)", "", null,  createMockedDate(3)));
-        listener.onResult(new EventSelectResult(0, eventList));
+        listener.onResult(new EventSelectResponse(0, eventList));
     }
 
     /**

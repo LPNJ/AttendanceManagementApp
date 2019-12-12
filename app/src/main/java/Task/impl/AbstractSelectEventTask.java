@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Task.ServerTask;
@@ -38,17 +39,17 @@ abstract class AbstractSelectEventTask extends ServerTask<String, EventSelectRes
     @Override
     protected EventSelectResponse parseJson(JSONObject json) {
         int error = json.optInt("error", -1);
-        EventSelectResponse response = new EventSelectResponse(error);
-        List<JSONObject> list = null;
         try {
-            list = (List) json.get("eventList");
+            List<JSONObject> list = (List) json.get("eventList");
+            List<EventInfo> events = new ArrayList<>();
             for (JSONObject obj : list) {
                 EventInfo info = EventInfo.parseJson(obj);
-                response.addEventInfo(info);
+                events.add(info);
             }
+            return new EventSelectResponse(error, events);
         } catch (JSONException e) {
             e.printStackTrace();
+            return null;
         }
-        return response;
     }
 }
