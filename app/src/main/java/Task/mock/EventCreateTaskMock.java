@@ -3,12 +3,12 @@ package Task.mock;
 import Task.EventCreateTask;
 import Task.ResultListener;
 import Task.serialize.EventCreateRequest;
-import result.EventCreateResult;
+import Task.serialize.EventCreateResponse;
 
 public class EventCreateTaskMock implements EventCreateTask {
 
     @Override
     public void execute(EventCreateRequest eventCreateRequest, ResultListener listener) {
-        listener.onResult(new EventCreateResult(0,"0011"));
+        listener.onResult(new EventCreateResponse(0,"0011"));
     }
 }

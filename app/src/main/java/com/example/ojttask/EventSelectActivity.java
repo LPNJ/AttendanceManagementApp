@@ -1,5 +1,7 @@
 package com.example.ojttask;
 
+import Task.serialize.EventCreateResponse;
+import Task.serialize.EventSelectResponse;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,9 +18,8 @@ import Task.EventSelectTask;
 import Task.ResultListener;
 import Task.mock.EventSelectTaskMock;
 import entity.LoginUser;
-import result.EventSelectResult;
 
-public class EventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResult> {
+public class EventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResponse> {
 
     private final EventSelectTask mEventSelectTask;
 
@@ -44,13 +45,13 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
     }
 
     @Override
-    public void onResult(final EventSelectResult result) {
+    public void onResult(final EventSelectResponse result) {
         if (result == null) {
             throw new IllegalArgumentException("result is null");
         }
         if (result.getError() == 0) {
             // TODO resultからList<EventInfo>の情報を取得して、メンバ変数に設定する
-            List<String> eventNameList = result.getEventNameList();
+            List<String> eventNameList = result.getWorkingEventNames();
 
             ListView events = findViewById(R.id.event_list);
 
@@ -68,9 +69,15 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
                     int id_info = intent.getIntExtra("screen_info", 0);
                     Log.i("Menu", id_info +  "");
                     switch (id_info) {
+                        case R.id.edit: {
+                            Intent i = new Intent(EventSelectActivity.this, EventEditActivity.class);
+                            i.putExtra(IntentKey.REFERENCE_EVENT,  result.getWorkingEvents().get((int) id));
+                            startActivity(i);
+                        }
+                        break;
                         case R.id.delete: {
                             Intent i = new Intent(EventSelectActivity.this, DeleteActivity.class);
-                            i.putExtra(IntentKey.REFERENCE_EVENT,  result.getEventInfoList().get((int) id));
+                            i.putExtra(IntentKey.REFERENCE_EVENT,  result.getWorkingEvents().get((int) id));
                             startActivity(i);
                         }
                         break;

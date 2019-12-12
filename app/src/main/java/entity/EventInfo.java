@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -109,14 +110,7 @@ public class EventInfo implements Serializable {
      * @param time
      */
     public void removeCandidate(String date, String time) {
-        CandidateDate removeDate = null;
-        String trimmedDateTime = date.trim() + " " + time.trim();
-        for (CandidateDate candidate : mCandidateDates) {
-            if (candidate.getDateAndTime().equals(trimmedDateTime)) {
-                removeDate = candidate;
-                break;
-            }
-        }
+        CandidateDate removeDate = contains(date, time);
         if (removeDate == null) {
             return;
         }
@@ -182,5 +176,43 @@ public class EventInfo implements Serializable {
             }
         }
         return eventInfo;
+    }
+
+    /**
+     * 引数の日付と時間を持った{@link CandidateDate}を削除します。
+     * @param dateTimes
+     */
+    public void removeCandidates(List<String> dateTimes) {
+        // 全リストをディープコピー
+        List<CandidateDate> deleteTarget = new ArrayList<>(mCandidateDates);
+        // 不要なデータだけ抽出する
+        for (String dateTime : dateTimes) {
+            CandidateDate remain = contains(dateTime);
+            if (remain == null) {
+                continue;
+            }
+            deleteTarget.remove(remain);
+        }
+        mCandidateDates.removeAll(deleteTarget);
+    }
+    /**
+     * 引数の日付と時間を持った{@link CandidateDate}があるかを確認する
+     * @param date 日付
+     * @param time 時間
+     */
+    public CandidateDate contains(String date, String time) {
+        return contains(date.trim() + " " + time.trim());
+    }
+    /**
+     * 引数の日付と時間を持った{@link CandidateDate}があるかを確認する
+     * @param dateTime
+     */
+    public CandidateDate contains(String dateTime) {
+        for (CandidateDate candidate : mCandidateDates) {
+            if (candidate.getDateAndTime().equals(dateTime)) {
+                return candidate;
+            }
+        }
+        return null;
     }
 }

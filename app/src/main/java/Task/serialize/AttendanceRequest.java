@@ -42,6 +42,7 @@ public class AttendanceRequest {
                     .put("userId", mUserId)
                     .put("eventId", mEventId)
                     .put("data", new JSONObject().put("candidates", jsons));
+
         } catch (JSONException e) {
             e.printStackTrace();
             return null;
