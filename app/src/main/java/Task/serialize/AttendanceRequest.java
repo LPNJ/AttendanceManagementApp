@@ -19,6 +19,7 @@ import entity.CandidateDate;
 public class AttendanceRequest {
     private final String mEventId;
     private final String mUserId;
+<<<<<<< Updated upstream
     private final List<CandidateDate> mCandidates;
 
     public AttendanceRequest(
@@ -26,6 +27,13 @@ public class AttendanceRequest {
         mEventId = eventId;
         mUserId = userId;
         mCandidates = candidateDates;
+=======
+    private final EventInfo mEventInfo;
+
+    public AttendanceRequest(String userId, EventInfo eventInfo) {
+        mUserId = userId;
+        mEventInfo = eventInfo;
+>>>>>>> Stashed changes
     }
 
     public JSONObject toJson() {
@@ -40,8 +48,15 @@ public class AttendanceRequest {
             }
             return new JSONObject()
                     .put("userId", mUserId)
+<<<<<<< Updated upstream
                     .put("eventId", mEventId)
                     .put("data", new JSONObject().put("candidates", jsons));
+=======
+                    .put("eventId", mEventInfo.getEventId());
+//                    .put("date", mDate.getDate())
+//                    .put("time", mDate.getTime())
+//                    .put("status", mAttendanceType.toInt());
+>>>>>>> Stashed changes
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

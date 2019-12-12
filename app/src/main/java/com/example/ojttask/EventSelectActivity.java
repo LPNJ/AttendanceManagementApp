@@ -68,6 +68,12 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
                     int id_info = intent.getIntExtra("screen_info", 0);
                     Log.i("Menu", id_info +  "");
                     switch (id_info) {
+                        case R.id.edit: {
+                            Intent i = new Intent(EventSelectActivity.this, EventEditActivity.class);
+                            i.putExtra(IntentKey.REFERENCE_EVENT,  result.getEventInfoList().get((int) id));
+                            startActivity(i);
+                        }
+                        break;
                         case R.id.delete: {
                             Intent i = new Intent(EventSelectActivity.this, DeleteActivity.class);
                             i.putExtra(IntentKey.REFERENCE_EVENT,  result.getEventInfoList().get((int) id));

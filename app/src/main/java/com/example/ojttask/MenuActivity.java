@@ -29,7 +29,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                  break;
 
             case R.id.edit: {
-                Intent intent_edit = new Intent(MenuActivity.this, EventEditActivity.class);
+                Intent intent_edit = new Intent(MenuActivity.this, EventSelectActivity.class);
                 intent_edit.putExtra("screen_info", R.id.edit);
                 startActivity(intent_edit);
             }
@@ -60,10 +60,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 //                startActivity(intent_notice);
             }
             break;
-
-
-
-            // TODO イベント変更とお知らせと確定を追加
             }
         }
 
@@ -75,8 +71,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         Button button_create = findViewById(R.id.create);
         Button button_register = findViewById(R.id.attend_register);
+        Button button_edit = findViewById(R.id.edit);
         Button button_delete = findViewById(R.id.delete);
         button_delete.setOnClickListener(this);
+        button_edit.setOnClickListener(this);
         button_create.setOnClickListener(this);
         button_register.setOnClickListener(this);
 

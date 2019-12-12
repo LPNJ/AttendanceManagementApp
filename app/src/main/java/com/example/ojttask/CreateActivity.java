@@ -30,13 +30,6 @@ import entity.EventInfo;
 import result.EventCreateResult;
 
 public class CreateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResult> {
-    /** 日付を入力するテキストビューのID一覧 */
-    private static final List<Integer> DATE_TEXTVIEW_ID_LIST = Collections.unmodifiableList(Arrays.asList(
-            new Integer[] {
-                    R.id.Date1_Create, R.id.Date2_Create, R.id.Date3_Create, R.id.Date4_Create, R.id.Date5_Create,
-                    R.id.Date6_Create, R.id.Date7_Create, R.id.Date8_Create, R.id.Date9_Create, R.id.Date10_Create,
-            }
-    ));
     /** 時間を入力するテキストビューのID一覧 */
     private static final List<Integer> TIME_TEXTVIEW_ID_LIST = Collections.unmodifiableList(Arrays.asList(
             new Integer[] {
@@ -45,6 +38,13 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
             }
     ));
     private TextView mDisplayDate[] = new TextView[10];
+    /** 日付を入力するテキストビューのID一覧 */
+    private static final List<Integer> DATE_TEXTVIEW_ID_LIST = Collections.unmodifiableList(Arrays.asList(
+            new Integer[] {
+                    R.id.Date1_Create, R.id.Date2_Create, R.id.Date3_Create, R.id.Date4_Create, R.id.Date5_Create,
+                    R.id.Date6_Create, R.id.Date7_Create, R.id.Date8_Create, R.id.Date9_Create, R.id.Date10_Create,
+            }
+    ));
     private TextView mDisplayTime[] = new TextView[10];
 
     private static final String DATE_PICKER = "date picker";
@@ -62,12 +62,7 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
         mEventCreateTask = new EventCreateTaskMock(/*this*/);
         Log.i("Regist","register activity constructor");
     }
-
-
     private Button mBottun_registration_create;
-
-    /** 候補日のリスト */
-    private List<CandidateDate> dates = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,6 +173,8 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                     setTime(9);
                     break;
                 case R.id.registration_create: {
+
+                    List<CandidateDate> dates = createCandidateDateList();
                     EventInfo ei = new EventInfo("","",EventInfo.UNDEFINED_EVENT_NUMBER, dates);
                     mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
                     for(CandidateDate date : dates){
@@ -197,6 +194,20 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
             DialogFragment timepicker = new TimePickerFragment();
             timepicker.setCancelable(false);
             timepicker.show(getSupportFragmentManager(),TIME_PICKER);
+        }
+
+        private List<CandidateDate> createCandidateDateList() {
+            List<CandidateDate> candidateDates = new ArrayList<>();
+            for (int i = 0; i < DATE_TEXTVIEW_ID_LIST.size(); ++i) {
+                String date = mDisplayDate[i].getText().toString();
+                String time = mDisplayTime[i].getText().toString();
+                if (date == null || time == null) {
+                    // TODO 空だったらエラー（Validation)
+                    continue;
+                }
+                candidateDates.add(new CandidateDate(date, time));
+            }
+            return candidateDates;
         }
     }
 }
