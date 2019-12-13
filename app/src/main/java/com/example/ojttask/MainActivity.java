@@ -43,6 +43,14 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
         mLoginTask = new LoginTaskMock(/*this*/);
     }
 
+    /**
+     * MT用
+     * @param task
+     */
+    public void setTask(LoginTask task) {
+        mLoginTask = task;
+    }
+
     class MainActivityOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
