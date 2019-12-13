@@ -11,42 +11,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="ID"
         android:inputType="textPersonName"
+        android:maxLength="128"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.293"
-        android:maxLength="128"/>
+        app:layout_constraintVertical_bias="0.293" />
 
     <EditText
         android:id="@+id/register_PASS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="New Password"
         android:inputType="textPassword"
+        android:maxLength="128"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.438"
-        android:maxLength="128"/>
+        app:layout_constraintVertical_bias="0.438" />
 
     <EditText
         android:id="@+id/register_COMFIRMATION_PASS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Confirm New Password"
         android:inputType="textPassword"
+        android:maxLength="128"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.577"
-        android:maxLength="128"/>
+        app:layout_constraintVertical_bias="0.577" />
 
     <Button
         android:id="@+id/registration"

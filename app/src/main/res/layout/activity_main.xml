@@ -8,22 +8,24 @@
 
     <Button
         android:id="@+id/newAccount"
-        android:layout_width="188dp"
-        android:layout_height="137dp"
+        android:layout_width="161dp"
+        android:layout_height="119dp"
+        android:layout_marginEnd="8dp"
         android:text="新規登録はこちら"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintEnd_toStartOf="@+id/login"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.858" />
+        app:layout_constraintVertical_bias="0.852" />
 
     <EditText
         android:id="@+id/editText_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="ID"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,27 +48,25 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="173dp"
-        android:layout_height="139dp"
+        android:layout_width="159dp"
+        android:layout_height="117dp"
+        android:layout_marginEnd="28dp"
         android:text="ログイン"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.861" />
+        app:layout_constraintVertical_bias="0.847" />
 
     <TextView
         android:id="@+id/textView36"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="社内イベント出欠管理アプリ作成"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="63dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="88dp"
+        android:text="ログイン"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

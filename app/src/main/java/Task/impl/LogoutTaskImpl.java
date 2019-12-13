@@ -14,8 +14,8 @@ public class LogoutTaskImpl extends SimpleServerTask<String> implements LogoutTa
 
     private static final String TAG = "LogoutTask";
 
-    public LogoutTaskImpl(ServerRequest.RequestType type, ResultListener listener) {
-        super(type, listener);
+    public LogoutTaskImpl(ResultListener listener) {
+        super(ServerRequest.RequestType.LOGOUT, listener);
     }
 
     public void execute(String userInfo, ResultListener listener) {

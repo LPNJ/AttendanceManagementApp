@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OJTTask</string>
+    <string name="app_name">イベント出欠管理アプリ</string>
     <string name="login_error">入力されていない項目があります</string>
     <string name="Not_allowed_error">許可されていない文字が含まれています</string>
 
@@ -18,6 +18,10 @@
 
     <string name="cannot_login">ログインに失敗しました</string>
     <string name="decision">内容を確定しますか？</string>
+
+    <string name="logout">ログアウトしますか？</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="ok">OK</string>
 </resources>

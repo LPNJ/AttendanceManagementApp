@@ -20,7 +20,6 @@
         <activity android:name=".NumberingActivity" />
         <activity android:name=".CreateActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".NewAccountCreateActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
