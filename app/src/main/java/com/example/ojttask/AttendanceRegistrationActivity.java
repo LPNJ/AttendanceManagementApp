@@ -1,7 +1,5 @@
 package com.example.ojttask;
 
-import Task.serialize.AttendanceRequest;
-import Task.serialize.EventCreateRequest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -12,10 +10,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,7 +24,7 @@ import entity.AttendanceInfo;
 import entity.AttendanceType;
 import entity.CandidateDate;
 import entity.EventInfo;
-import entity.LoginUser;
+import validator.EventCreateValidator;
 
 /**
  * 出欠登録画面
@@ -65,6 +61,11 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
         super();
         mAttendanceRegistrationTask = new AttendanceRegistrationMock();
     }
+    /**  */
+    private EditText mUserName;
+    /**  */
+    private EditText mPass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,9 +137,30 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
                     startActivity(intent);
                     break;
                 case R.id.event_attendance_decision: {
-                    mAttendanceRegistrationTask.execute(
-                            new AttendanceRequest(LoginUser.getInstance().getLoginUserId(), mEventInfo.getEventId(),
-                                    mEventInfo.getCandidateDates()), AttendanceRegistrationActivity.this);
+//                    int validationResult = new EventCreateValidator().validate(ei);
+                    int validationResult = 0;
+                    if(validationResult == 1) {
+                        new AlertDialog.Builder(AttendanceRegistrationActivity.this)
+                                .setMessage(R.string.login_error)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else if(validationResult == 8) {
+                        new AlertDialog.Builder(AttendanceRegistrationActivity.this)
+                                .setMessage(R.string.eventname_input_over)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else if(validationResult == 9) {
+                        new AlertDialog.Builder(AttendanceRegistrationActivity.this)
+                                .setMessage(R.string.eventdetails_input_over)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else{
+                        Intent intent2 = new Intent(AttendanceRegistrationActivity.this, MenuActivity.class);
+                        startActivity(intent2);
+                    }
                     break;
                 }
             }

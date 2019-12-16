@@ -12,6 +12,8 @@
 
     <string name="id_input_short">入力文字が足りません。入力範囲は6文字～128文字です</string>
     <string name="pass_input_short">入力文字が足りません。入力範囲は8文字～128文字です</string>
+    <string name="eventname_input_over">入力文字の制限を超えています。入力範囲は1文字～50文字です</string>
+    <string name="eventdetails_input_over">入力文字の制限を超えています。入力範囲は0文字～1000文字です</string>
     <string name="pass_not_match">パスワードが一致していません</string>
 
     <string name="cannot_connect">サーバーへの接続ができませんでした</string>

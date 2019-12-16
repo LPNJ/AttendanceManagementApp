@@ -3,6 +3,7 @@ package com.example.ojttask;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -28,6 +30,7 @@ import Task.serialize.EventCreateRequest;
 import entity.CandidateDate;
 import entity.EventInfo;
 import Task.serialize.EventCreateResponse;
+import validator.EventCreateValidator;
 
 public class CreateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResponse> {
     /** 時間を入力するテキストビューのID一覧 */
@@ -46,6 +49,11 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
             }
     ));
     private TextView mDisplayTime[] = new TextView[10];
+
+    /**  */
+    private EditText mEventName;
+    /**  */
+    private EditText mEventDetails;
 
     private static final String DATE_PICKER = "date picker";
     private static final String TIME_PICKER = "time picker";
@@ -75,6 +83,10 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
             mDisplayTime[i] = findViewById(TIME_TEXTVIEW_ID_LIST.get(i));
             mDisplayTime[i].setOnClickListener(listener);
         }
+
+        mEventName = findViewById(R.id.EventName_Create);
+        mEventDetails = findViewById(R.id.EventInfo_Create);
+
         mBottun_registration_create = findViewById(R.id.registration_create);
         mBottun_registration_create.setOnClickListener(listener);
     }
@@ -177,8 +189,39 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                     List<CandidateDate> dates = createCandidateDateList();
                     EventInfo ei = new EventInfo("","",EventInfo.UNDEFINED_EVENT_NUMBER, dates);
                     mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
-                    for(CandidateDate date : dates){
-                        Log.i("DATE", date.getDateAndTime());
+                    for(int i = 0; i < mDisplayDate.length; i++) {
+                        String date = mDisplayDate[i].getText().toString();
+                        String time = mDisplayTime[i].getText().toString();
+                        if(date.isEmpty() || time.isEmpty()){
+                            continue;
+                        }
+                        dates.add(new CandidateDate(date,time));
+                    }
+//                    EventInfo ei = new EventInfo(mEventName.getText().toString(),mEventDetails.getText().toString(),EventInfo.UNDEFINED_EVENT_NUMBER, dates);
+                    int validationResult = new EventCreateValidator().validate(ei);
+                    if(validationResult == 1) {
+                        new AlertDialog.Builder(CreateActivity.this)
+                                .setMessage(R.string.login_error)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else if(validationResult == 8) {
+                        new AlertDialog.Builder(CreateActivity.this)
+                                .setMessage(R.string.eventname_input_over)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else if(validationResult == 9) {
+                        new AlertDialog.Builder(CreateActivity.this)
+                                .setMessage(R.string.eventdetails_input_over)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else{
+                        mEventCreateTask.execute(new EventCreateRequest("", ei), CreateActivity.this);
+                        for (CandidateDate date : dates) {
+                            Log.i("DATE", date.getDateAndTime());
+                        }
                     }
                 }
                 break;
