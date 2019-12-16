@@ -4,7 +4,7 @@ import entity.UserInfo;
 
 public class UserLoginValidator implements Validator<UserInfo> {
 
-    public static final int ERROR_NOT_INPUT = 1;
+    private static final int ERROR_NOT_INPUT = 1;
 
     @Override
     public int validate(UserInfo data) {

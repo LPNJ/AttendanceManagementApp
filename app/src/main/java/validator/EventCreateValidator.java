@@ -2,15 +2,16 @@ package validator;
 
 import entity.EventInfo;
 
-public abstract class EventCreateValidator implements Validator<EventInfo> {
+public class EventCreateValidator implements Validator<EventInfo> {
 
     private static final int ERROR_NOT_INPUT = 1;
+    private static final int ERROR_EVENTNAME_TOO_LONG = 8;
+    private static final int ERROR_DETAILS_TOO_LONG = 9;
+
 
     // 入力長の閾値
     private static final int MAX_EVENTNAME_LENGTH = 50;
-    private static final int MAX_EVENTDETAILS_LENGTH = 1000;
-    private static final int MIN_EVENTNAME_LENGTH = 1;
-    private static final int MIN_EVENTDETAILS_LENGTH = 0;
+    private static final int MAX_DETAILS_LENGTH = 1000;
 
     @Override
     public int validate(EventInfo data) {
@@ -20,12 +21,13 @@ public abstract class EventCreateValidator implements Validator<EventInfo> {
         }
 
         // 入力が超過、不足
-        int eventNameError = validateLength(data.getEventName(),MIN_EVENTNAME_LENGTH, MAX_EVENTNAME_LENGTH,MIN_EVENTDETAILS_LENGTH , MAX_EVENTDETAILS_LENGTH);
+        int eventNameError = validateLength(data.getEventName(),MAX_EVENTNAME_LENGTH,ERROR_EVENTNAME_TOO_LONG);
         if (eventNameError != SUCCESS) {
             return eventNameError;
         }
 
-        int eventDetailsError = validateLength(data.getEventName(),MIN_EVENTNAME_LENGTH, MAX_EVENTNAME_LENGTH,MIN_EVENTDETAILS_LENGTH , MAX_EVENTDETAILS_LENGTH);
+        // 入力が超過、不足
+        int eventDetailsError = validateLength(data.getEventDetails(),MAX_DETAILS_LENGTH,ERROR_DETAILS_TOO_LONG);
         if (eventDetailsError != SUCCESS) {
             return eventDetailsError;
         }
@@ -33,11 +35,8 @@ public abstract class EventCreateValidator implements Validator<EventInfo> {
         return SUCCESS;
     }
 
-    private int validateLength(String value, int min, int max, int minError, int maxError) {
-        if (value.length() > min) {
-            return minError;
-        }
-        if (value.length() < max) {
+    private int validateLength(String value, int max, int maxError) {
+        if (value.length() > max) {
             return maxError;
         }
         return SUCCESS;
