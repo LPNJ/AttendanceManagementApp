@@ -37,7 +37,7 @@ public class TestUtils {
      * @param <T>
      * @return
      */
-    static <T extends Activity> String getLatestAlertDialogMessage(T t) {
+    static <T extends Activity> String getNextActivityName(T t) {
         ShadowActivity shadowActivity = Shadows.shadowOf(t);
         Intent intent = shadowActivity.peekNextStartedActivity();
         ShadowIntent shadowIntent = Shadows.shadowOf(intent);
