@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ojttask">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CreateActivity"></activity>
+        <activity android:name=".ReferenceActivity"></activity>
+        <activity android:name=".AttendanceRegistrationActivity" />
+        <activity android:name=".ParticipatingEventSelectActivity" />
+        <activity android:name=".DeleteActivity" />
+        <activity android:name=".EventEditActivity" />
+        <activity android:name=".EventSelectActivity" />
+        <activity android:name=".NumberingActivity" />
+        <activity android:name=".CreateActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".NewAccountCreateActivity" />
         <activity android:name=".MenuActivity" />

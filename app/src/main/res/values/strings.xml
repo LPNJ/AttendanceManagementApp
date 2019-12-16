@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">OJTTask</string>
+    <string name="login_error">入力されていない項目があります</string>
+    <string name="Not_allowed_error">許可されていない文字が含まれています</string>
+
+
+    <string name="cannot_register_error">そのユーザIDは登録できません</string>
+    <string name="id_input_long">入力文字の制限を超えています。入力範囲は半角英数6文字～128文字です</string>
+    <string name="pass_input_long">入力文字の制限を超えています。入力範囲は半角英数8文字～128文字です</string>
+
+
+
+    <string name="id_input_short">入力文字が足りません。入力範囲は6文字～128文字です</string>
+    <string name="pass_input_short">入力文字が足りません。入力範囲は8文字～128文字です</string>
+    <string name="pass_not_match">パスワードが一致していません</string>
+
+    <string name="cannot_connect">サーバーへの接続ができませんでした</string>
+
+    <string name="cannot_login">ログインに失敗しました</string>
+    <string name="decision">内容を確定しますか？</string>
+
+    <string name="ok">OK</string>
 </resources>
