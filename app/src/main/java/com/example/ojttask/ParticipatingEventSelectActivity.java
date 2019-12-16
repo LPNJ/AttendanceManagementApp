@@ -1,9 +1,12 @@
 package com.example.ojttask;
 
 import Task.mock.ParticipantEventSelectTaskMock;
+import Task.serialize.EventCreateRequest;
 import Task.serialize.EventSelectResponse;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +14,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
 
 import Task.ResultListener;
+import entity.CandidateDate;
+import entity.EventInfo;
 import entity.LoginUser;
+import validator.EventRegistVaridator;
 
 /***
  * 出欠登録をするイベント選択をする画面
@@ -28,6 +35,9 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
     private ParticipantEventSelectTaskMock mEventSelectTask;
     /** 確定ボタン */
     private Button mRegistration_participating;
+
+    /** 確定ボタン */
+    private EditText mEventId;
 
     /**
      * デフォルトコンストラクタ
@@ -42,8 +52,10 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participating_event_select);
         mEventSelectTask.execute(LoginUser.getInstance().getLoginUserId(), ParticipatingEventSelectActivity.this);
+        mEventId = findViewById(R.id.eventid_participating);
         mRegistration_participating = findViewById(R.id.registration_participating);
         mRegistration_participating.setOnClickListener(new ParticipatingEventSelectActivityOnClickListener());
+
     }
 
     @Override
@@ -77,12 +89,32 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.registration_participating: {
-                    Intent intent = new Intent(ParticipatingEventSelectActivity.this, AttendanceRegistrationActivity.class);
-                    //intent.putExtra(IntentKey.REFERENCE_EVENT, );
-                    startActivity(intent);
+                int returnCode = new EventRegistVaridator().validate(mEventId.getText().toString());
+                    if (returnCode == 0) {
+                        new AlertDialog.Builder(ParticipatingEventSelectActivity.this)
+                                .setMessage(R.string.decision)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(ParticipatingEventSelectActivity.this, AttendanceRegistrationActivity.class);
+                                        //intent.putExtra(IntentKey.REFERENCE_EVENT, );
+                                        startActivity(intent);
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null).show();
+                    } else if (returnCode == 4) {
+                        show(R.string.eventid_no_exist);
+                    }
                 }
                 break;
             }
+        }
+        void show(int msg){
+            new AlertDialog.Builder(ParticipatingEventSelectActivity.this)
+                    .setMessage(msg)
+                    .setPositiveButton("OK", null)
+                    .create()
+                    .show();
         }
     }
 }

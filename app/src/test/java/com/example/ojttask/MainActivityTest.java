@@ -66,7 +66,7 @@ public class MainActivityTest {
         loginButton.performClick();
 
         // ●verify(検証)
-        String nextActivityName = TestUtils.getLatestAlertDialogMessage(mMainActivity);
+        String nextActivityName = TestUtils.getNextActivityName(mMainActivity);
         assertThat(nextActivityName, is(MenuActivity.class.getName()));
     }
 

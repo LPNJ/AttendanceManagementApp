@@ -5,6 +5,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,7 +87,6 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
 
         mEventName = findViewById(R.id.EventName_Create);
         mEventDetails = findViewById(R.id.EventInfo_Create);
-
         mBottun_registration_create = findViewById(R.id.registration_create);
         mBottun_registration_create.setOnClickListener(listener);
     }
@@ -185,47 +185,37 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                     setTime(9);
                     break;
                 case R.id.registration_create: {
-
-                    List<CandidateDate> dates = createCandidateDateList();
-                    EventInfo ei = new EventInfo("","",EventInfo.UNDEFINED_EVENT_NUMBER, dates);
-                    mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
-                    for(int i = 0; i < mDisplayDate.length; i++) {
-                        String date = mDisplayDate[i].getText().toString();
-                        String time = mDisplayTime[i].getText().toString();
-                        if(date.isEmpty() || time.isEmpty()){
-                            continue;
-                        }
-                        dates.add(new CandidateDate(date,time));
-                    }
-//                    EventInfo ei = new EventInfo(mEventName.getText().toString(),mEventDetails.getText().toString(),EventInfo.UNDEFINED_EVENT_NUMBER, dates);
-                    int validationResult = new EventCreateValidator().validate(ei);
-                    if(validationResult == 1) {
+                    int returnCode = new EventCreateValidator().validate(new EventInfo(mEventName.getText().toString(),mEventDetails.getText().toString(),"0011",createCandidateDateList()));
+                    if (returnCode == 0) {
                         new AlertDialog.Builder(CreateActivity.this)
-                                .setMessage(R.string.login_error)
-                                .setPositiveButton(R.string.ok, null)
-                                .create()
-                                .show();
-                    }else if(validationResult == 8) {
-                        new AlertDialog.Builder(CreateActivity.this)
-                                .setMessage(R.string.eventname_input_over)
-                                .setPositiveButton(R.string.ok, null)
-                                .create()
-                                .show();
-                    }else if(validationResult == 9) {
-                        new AlertDialog.Builder(CreateActivity.this)
-                                .setMessage(R.string.eventdetails_input_over)
-                                .setPositiveButton(R.string.ok, null)
-                                .create()
-                                .show();
-                    }else{
-                        mEventCreateTask.execute(new EventCreateRequest("", ei), CreateActivity.this);
-                        for (CandidateDate date : dates) {
-                            Log.i("DATE", date.getDateAndTime());
-                        }
+                                .setMessage(R.string.decision)
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        List<CandidateDate> dates = createCandidateDateList();
+                                        EventInfo ei = new EventInfo(mEventName.toString(),mEventDetails.toString(),EventInfo.UNDEFINED_EVENT_NUMBER, dates);
+                                        mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null).show();
+                    } else if (returnCode == 1) {
+                        show(R.string.login_error);
+                    } else if (returnCode == 8) {
+                        show(R.string.Not_allowed_error);
+                    } else if (returnCode == 9) {
+                        show(R.string.id_input_long);
                     }
                 }
                 break;
             }
+        }
+
+        void show(int msg){
+            new AlertDialog.Builder(CreateActivity.this)
+                    .setMessage(msg)
+                    .setPositiveButton("OK", null)
+                    .create()
+                    .show();
         }
 
         private void setDate(int id) {
@@ -244,8 +234,8 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
             for (int i = 0; i < DATE_TEXTVIEW_ID_LIST.size(); ++i) {
                 String date = mDisplayDate[i].getText().toString();
                 String time = mDisplayTime[i].getText().toString();
-                if (date == null || time == null) {
-                    // TODO 空だったらエラー（Validation)
+                Log.i("time",time);
+                if (date == null || time == null || date.isEmpty() || time.isEmpty()) {
                     continue;
                 }
                 candidateDates.add(new CandidateDate(date, time));

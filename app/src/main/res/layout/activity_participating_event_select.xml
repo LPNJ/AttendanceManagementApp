@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.307" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/eventid_participating"
         android:layout_width="132dp"
         android:layout_height="47dp"
         android:ems="10"

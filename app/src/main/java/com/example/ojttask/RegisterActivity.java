@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements ResultListene
      */
     private String mConfirmationPass_info;
 
-    private final RegisterTask mRegisterTask;
+    private RegisterTask mRegisterTask;
 
     AlertDialog mAlertDlg;
 
@@ -71,6 +71,14 @@ public class RegisterActivity extends AppCompatActivity implements ResultListene
         mErrorMessage.put(-1, R.string.cannot_connect);
         mErrorMessage.put(1, R.string.cannot_register_error);
         Log.i("Regist", "register activity contstructor");
+    }
+
+    /**
+     * MT用
+     * @param task
+     */
+    public void setTask(RegisterTask task) {
+        mRegisterTask = task;
     }
 
     /**
