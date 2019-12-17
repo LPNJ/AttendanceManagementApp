@@ -135,6 +135,14 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
         }
     }
 
+    /**
+     * テスト用にmTargetDateを取得する
+     * @return
+     */
+    CandidateDate getCaddCandidateDate(){
+        return mTargetDate;
+    }
+
     private class AttendanceRegistrationActivityOnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -158,6 +166,7 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
 
                     AttendanceInfo info = new AttendanceInfo(mUserName.getText().toString(), valueOf(idx));
                     int validationResult = new AttendanceValidator().validate(info);
+                    Log.i("result", String.valueOf(validationResult));
                     if(validationResult == 1) {
                         new AlertDialog.Builder(AttendanceRegistrationActivity.this)
                                 .setMessage(R.string.login_error)
