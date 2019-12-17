@@ -41,9 +41,10 @@ public class ServerRequest {
 
         private final String mUrl;
         private final MethodType mMethodType;
-
-        RequestType(String url, MethodType type) {
-            mUrl = "http://" + IP_ADDRESS + "/" + url;
+        private static final String IP_ADDRESS = "133.139.115.184";
+        private static final String PORT = "8080";
+        RequestType(String endPoint, MethodType type) {
+            mUrl = "http://" + IP_ADDRESS + ":" + PORT + "/event/api/" + endPoint;
             mMethodType = type;
         }
 
@@ -55,8 +56,6 @@ public class ServerRequest {
             return mMethodType;
         }
     }
-    // TODO 修正する
-    private static final String IP_ADDRESS = "localhost";
     private static final String ENCODING = "UTF-8";
     private final RequestType mRequestType;
     private final JSONObject mRequestBody;
