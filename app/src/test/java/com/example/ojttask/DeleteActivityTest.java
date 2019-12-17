@@ -71,7 +71,7 @@ public class DeleteActivityTest {
         Intent mIntent = Mockito.mock(Intent.class);
         mDeleteActivity.onResult(0);
 
-        String nextActiveName = TestUtils.getLatestAlertDialogMessage(mDeleteActivity);
+        String nextActiveName = TestUtils.getNextActivityName(mDeleteActivity);
         assertThat(nextActiveName,is(MenuActivity.class.getName()));
 
     }
@@ -106,7 +106,7 @@ public class DeleteActivityTest {
 
         Button button = mDeleteActivity.findViewById(R.id.cancel_delete);
         button.performClick();
-        String nextActivityName = TestUtils.getLatestAlertDialogMessage(mDeleteActivity);
+        String nextActivityName = TestUtils.getNextActivityName(mDeleteActivity);
         assertThat(nextActivityName, is(EventSelectActivity.class.getName()));
 
     }
