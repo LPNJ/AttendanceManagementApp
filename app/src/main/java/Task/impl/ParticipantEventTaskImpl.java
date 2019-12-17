@@ -11,28 +11,13 @@ import Task.ParticipantEventTask;
 import Task.ResultListener;
 import Task.ServerRequest;
 
-public class ParticipantEventTaskImpl extends ServerTask<String, Integer> implements ParticipantEventTask {
-    ParticipantEventTaskImpl(ResultListener listener) {
+public class ParticipantEventTaskImpl extends AbstractSelectEventTask implements ParticipantEventTask {
+    public ParticipantEventTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.GET_ALL_ATTENDANCE_EVENT, listener);
     }
-    @Override
-    protected JSONObject createJson(String... v) {
-        try {
-            return new JSONObject().put("userId", v[0]);
-        } catch (JSONException e) {
-            Log.e("ParEveTask", "serialize error.", e);
-            return null;
-        }
-    }
 
     @Override
-    protected Integer parseJson(JSONObject json) {
-        // TODO 実装する必要ある
-        return null;
-    }
-
-    @Override
-    public void execute(String s, ResultListener listener) {
-
+    public void execute(String userId, ResultListener listener) {
+        super.execute(userId);
     }
 }

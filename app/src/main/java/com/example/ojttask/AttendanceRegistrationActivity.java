@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.serialize.AttendanceRequest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -24,6 +25,7 @@ import entity.AttendanceInfo;
 import entity.AttendanceType;
 import entity.CandidateDate;
 import entity.EventInfo;
+import entity.LoginUser;
 import validator.AttendanceValidator;
 import validator.EventCreateValidator;
 
@@ -101,10 +103,6 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
         ((RadioGroup)findViewById(R.id.radio_group)).setOnCheckedChangeListener(this);
         findViewById(R.id.event_attendance_reference).setOnClickListener(listener);
         findViewById(R.id.event_attendance_decision).setOnClickListener(listener);
-        AttendanceRegistrationTask task = new AttendanceRegistrationMock();
-
-
-//        task.execute(new AttendanceRequest());
     }
 
     @Override
@@ -158,7 +156,8 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
                     int idx = mRagioGroup.indexOfChild(radioButton);
                     Log.i("id",String.valueOf(idx));
 
-                    int validationResult = new AttendanceValidator().validate(new AttendanceInfo(mUserName.getText().toString(), valueOf(idx)));
+                    AttendanceInfo info = new AttendanceInfo(mUserName.getText().toString(), valueOf(idx));
+                    int validationResult = new AttendanceValidator().validate(info);
                     if(validationResult == 1) {
                         new AlertDialog.Builder(AttendanceRegistrationActivity.this)
                                 .setMessage(R.string.login_error)
@@ -172,8 +171,9 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
                                 .create()
                                 .show();
                     }else{
-                        Intent intent2 = new Intent(AttendanceRegistrationActivity.this, MenuActivity.class);
-                        startActivity(intent2);
+                        AttendanceRequest request = new AttendanceRequest(
+                                LoginUser.getInstance().getLoginUserId(), mEventInfo.getEventId(), mEventInfo.getCandidateDates());
+                        mAttendanceRegistrationTask.execute(request, AttendanceRegistrationActivity.this);
                     }
                     break;
                 }

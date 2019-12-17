@@ -20,8 +20,9 @@ import Task.mock.EventSelectTaskMock;
 import entity.LoginUser;
 
 public class EventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResponse> {
+    private static final String TAG = "EveSeleAc";
 
-    private final EventSelectTask mEventSelectTask;
+    private EventSelectTask mEventSelectTask;
 
     /**
      * デフォルトコンストラクタ
@@ -31,14 +32,15 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
         Log.i("Menu","menu activity constructor");
     }
 
+    void setTask(EventSelectTask task) {
+        mEventSelectTask = task;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_select);
-
-
         Intent intent = getIntent();
-        // TODO 前画面の情報をメンバ変数に設定する
         int id_info = intent.getIntExtra("screen_info", 0);
         Log.i("Menu", id_info +  "");
         mEventSelectTask.execute(LoginUser.getInstance().getLoginUserId(), EventSelectActivity.this);
@@ -50,7 +52,6 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
             throw new IllegalArgumentException("result is null");
         }
         if (result.getError() == 0) {
-            // TODO resultからList<EventInfo>の情報を取得して、メンバ変数に設定する
             List<String> eventNameList = result.getWorkingEventNames();
 
             ListView events = findViewById(R.id.event_list);
@@ -63,9 +64,7 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
             events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    // TODO メンバ変数に設定したList＜EventInfo＞からpositionのEventInfoを取得する
                     Intent intent = getIntent();
-                    // TODO 前画面の情報をメンバ変数に設定する
                     int id_info = intent.getIntExtra("screen_info", 0);
                     Log.i("Menu", id_info +  "");
                     switch (id_info) {
@@ -82,11 +81,10 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
                         }
                         break;
                     }
-                    // TODO 前画面の情報をもとに次の画面に遷移する
-                    // TODO EventInfoからJsonを取得してintentに設定する。
-
                 }
             });
+        } else {
+            Log.e(TAG, "サーバーからイベントの取得に失敗しました。");
         }
     }
 }

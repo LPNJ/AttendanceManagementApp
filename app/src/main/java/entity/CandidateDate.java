@@ -27,6 +27,16 @@ public class CandidateDate implements Serializable {
      * @param info
      */
     public void addAttendance(AttendanceInfo info) {
+        AttendanceInfo removedInfo = null;
+        for (AttendanceInfo attendanceInfo : mAttendanceInfoList) {
+            if (attendanceInfo.getAttendanceName().equals(info.getAttendanceName())) {
+                removedInfo = attendanceInfo;
+                break;
+            }
+        }
+        if (removedInfo != null) {
+            mAttendanceInfoList.remove(removedInfo);
+        }
         mAttendanceInfoList.add(info);
     }
 
