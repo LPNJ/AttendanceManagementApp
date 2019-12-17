@@ -1,6 +1,5 @@
 package com.example.ojttask;
 
-import android.content.Intent;
 import android.os.Build;
 import android.widget.ListView;
 
@@ -16,7 +15,7 @@ import org.robolectric.shadows.ShadowLog;
 import java.util.ArrayList;
 import java.util.List;
 
-import Task.EventSelectTask;
+import Task.ParticipantEventTask;
 import Task.ResultListener;
 import Task.serialize.EventSelectResponse;
 import entity.CandidateDate;
@@ -27,7 +26,7 @@ import static org.junit.Assert.*;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.O)
-public class EventSelectActivityTest {
+public class ParticipatingEventSelectActivityTest {
     /**
      * @Before がついたメソッドは、すべてのテストメソッド(@Testがついたメソッド)の
      * 実施前に呼び出される。
@@ -47,50 +46,49 @@ public class EventSelectActivityTest {
     }
 
     @Test
-    public void onItemClickEdit() {
+    public void onItemClick() {
         // ●setup(準備)
-        EventSelectActivity activity = createActivity(R.id.edit);
-        activity.setTask(createTask(createResponse()));
-        ListView listView = activity.findViewById(R.id.event_list);
+        ParticipatingEventSelectActivity activity =
+                Robolectric.buildActivity(ParticipatingEventSelectActivity.class).get();
+        activity.setParticipantEventTask(createTask(createResponse()));
+        activity.onCreate(null);
+        ListView listView = activity.findViewById(R.id.event_list_participating);
 
         // ●execute(テストの実施)
         listView.performItemClick(null, 0, 0);
 
         // ●verify(検証)
-        String nextActivityName = TestUtils.getLatestAlertDialogMessage(activity);
-        assertThat(nextActivityName, is(EventEditActivity.class.getName()));
+        String nextActivityName = TestUtils.getNextActivityName(activity);
+        assertThat(nextActivityName, is(AttendanceRegistrationActivity.class.getName()));
     }
-    @Test
-    public void onItemClickDelete() {
-        // ●setup(準備)
-        EventSelectActivity activity = createActivity(R.id.delete);
-        activity.setTask(createTask(createResponse()));
-        ListView listView = activity.findViewById(R.id.event_list);
 
-        // ●execute(テストの実施)
-        listView.performItemClick(null, 0, 0);
-
-        // ●verify(検証)
-        String nextActivityName = TestUtils.getLatestAlertDialogMessage(activity);
-        assertThat(nextActivityName, is(DeleteActivity.class.getName()));
-    }
+    /**
+     * 実装できない・・・
+     */
+//    @Test
+//    public void onClick() {
+//        // ●setup(準備)
+//        EventSelectActivity activity = createActivity(R.id.delete);
+//        activity.setParticipantEventTask(createTask(createResponse()));
+//        ListView listView = activity.findViewById(R.id.event_list);
+//
+//        // ●execute(テストの実施)
+//        listView.performItemClick(null, 0, 0);
+//
+//        // ●verify(検証)
+//        String nextActivityName = TestUtils.getLatestAlertDialogMessage(activity);
+//        assertThat(nextActivityName, is(DeleteActivity.class.getName()));
+//    }
 
     @Test(expected = IllegalArgumentException.class)
     public void onResultResultNull() {
         // ●setup(準備)
-        Intent intent = new Intent();
-        intent.putExtra("screen_info", R.id.edit);
-        EventSelectActivity activity = Robolectric.buildActivity(EventSelectActivity.class, intent).get();
-        activity.setTask(createTask(null));
+        ParticipatingEventSelectActivity activity =
+                Robolectric.buildActivity(ParticipatingEventSelectActivity.class).get();
+        activity.setParticipantEventTask(createTask(null));
 
         // ●execute(テストの実施)
         activity.onCreate(null);
-    }
-
-    private EventSelectActivity createActivity(int buttonId) {
-        Intent intent = new Intent();
-        intent.putExtra("screen_info", buttonId);
-        return TestUtils.createActivity(EventSelectActivity.class, intent);
     }
 
     private EventSelectResponse createResponse() {
@@ -109,8 +107,8 @@ public class EventSelectActivityTest {
      * @param result
      * @return
      */
-    private EventSelectTask createTask(final EventSelectResponse result) {
-        return new EventSelectTask() {
+    private ParticipantEventTask createTask(final EventSelectResponse result) {
+        return new ParticipantEventTask() {
             @Override
             public void execute(String id, ResultListener listener) {
                 listener.onResult(result);

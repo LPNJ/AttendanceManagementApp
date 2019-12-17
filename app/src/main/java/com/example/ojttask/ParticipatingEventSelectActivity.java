@@ -1,5 +1,7 @@
 package com.example.ojttask;
 
+import Task.EventSelectTask;
+import Task.ParticipantEventTask;
 import Task.mock.ParticipantEventSelectTaskMock;
 import Task.serialize.EventCreateRequest;
 import Task.serialize.EventSelectResponse;
@@ -32,7 +34,7 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
     /** ログに出力するタグ名 */
     private static final String TAG = ParticipatingEventSelectActivity.class.getSimpleName();
     /** イベントを選択・出欠の内容を入力するタスク */
-    private ParticipantEventSelectTaskMock mEventSelectTask;
+    private ParticipantEventTask mEventSelectTask;
     /** 確定ボタン */
     private Button mRegistration_participating;
 
@@ -45,6 +47,14 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
     public ParticipatingEventSelectActivity() {
         mEventSelectTask = new ParticipantEventSelectTaskMock();
         Log.i(TAG, "activity constructor");
+    }
+
+    void setParticipantEventTask(ParticipantEventTask task) {
+        mEventSelectTask = task;
+    }
+
+    void setEventSelectTask(ParticipantEventTask task) {
+        mEventSelectTask = task;
     }
 
     @Override
@@ -96,6 +106,7 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        // TODO イベントIDからイベント取得する必要がある。
                                         Intent intent = new Intent(ParticipatingEventSelectActivity.this, AttendanceRegistrationActivity.class);
                                         //intent.putExtra(IntentKey.REFERENCE_EVENT, );
                                         startActivity(intent);

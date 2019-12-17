@@ -20,6 +20,7 @@ import Task.mock.EventSelectTaskMock;
 import entity.LoginUser;
 
 public class EventSelectActivity extends AppCompatActivity implements ResultListener<EventSelectResponse> {
+    private static final String TAG = "EveSeleAc";
 
     private EventSelectTask mEventSelectTask;
 
@@ -82,6 +83,8 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
                     }
                 }
             });
+        } else {
+            Log.e(TAG, "サーバーからイベントの取得に失敗しました。");
         }
     }
 }
