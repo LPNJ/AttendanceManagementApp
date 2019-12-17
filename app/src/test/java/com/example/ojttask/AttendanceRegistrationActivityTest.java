@@ -26,7 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Task.AttendanceRegistrationTask;
+import Task.ResultListener;
 import Task.mock.AttendanceRegistrationMock;
+import Task.mock.DeleteTaskMock;
+import Task.serialize.AttendanceRequest;
+import Task.serialize.EventCreateRequest;
 import entity.AttendanceInfo;
 import entity.AttendanceType;
 import entity.CandidateDate;
@@ -57,6 +61,18 @@ public class AttendanceRegistrationActivityTest {
     }
 
     public List createCandidateDateList(){
+        ArrayList<CandidateDate> mlist = new ArrayList<CandidateDate>();
+        CandidateDate mdate = new CandidateDate("19920828","11:40:24");
+        mdate.addAttendance(new AttendanceInfo("name",AttendanceType.ATTENDANCE));
+        mlist.add(mdate);
+        mdate = new CandidateDate("19990222", "12:12:12");
+        mdate.addAttendance(new AttendanceInfo("name",AttendanceType.UNKNOWN));
+
+        mlist.add(mdate);
+        return mlist;
+    }
+
+    public List createCandidateDateList_NoAttendanceInfo(){
         ArrayList<CandidateDate> mlist = new ArrayList<CandidateDate>();
         CandidateDate mdate = new CandidateDate("19920828","11:40:24");
         mlist.add(mdate);
@@ -132,13 +148,30 @@ public class AttendanceRegistrationActivityTest {
     @Test
     public void radioTest_event_attendance_decision() throws NoSuchFieldException, IllegalAccessException {
         AppCompatButton mButton = mActivity.findViewById(R.id.event_attendance_decision);
-        RadioGroup mRadioGroup = Mockito.mock(RadioGroup.class);
-        AttendanceValidator mAttendanceValidator = Mockito.mock(AttendanceValidator.class);
-        //whenNew(AttendanceValidator.class);
-        //when(mAttendanceValidator.validate()).thenReturn(1);
-
+        EditText mEditText = mActivity.findViewById(R.id.event_attendance_name);
+        mEditText.setText("test");
+        AttendanceRegistrationMock mMock = createTask(0);
         mButton.performClick();
+    }
 
+
+    @Test
+    public void radioTest_event_attendance_decision_error() throws NoSuchFieldException, IllegalAccessException {
+        AppCompatButton mButton = mActivity.findViewById(R.id.event_attendance_decision);
+        EditText mEditText = mActivity.findViewById(R.id.event_attendance_name);
+        mEditText.setText(null);
+        mButton.performClick();
+        String message = TestUtils.getLatestAlertDialogMessage();
+        assertThat(message, is("入力されていない項目があります"));
+    }
+
+    private AttendanceRegistrationMock createTask(final int result){
+        return new AttendanceRegistrationMock() {
+            @Override
+            public void execute(AttendanceRequest attendanceRequest, ResultListener listener) {
+                listener.onResult(result);
+            }
+        };
     }
 
 }
