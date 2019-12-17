@@ -176,7 +176,7 @@ public class RegisterActivityTest {
         // ●setup(準備)
         // IDとPassを設定
 
-        enterIdAndPass("aaaaaa", "bbbbbbb","bbbbbbb");
+        enterIdAndPass("aaaaaa", "%%%%%%%%","%%%%%%%%");
         // LoginTaskで必ず成功が返るように設定
         RegisterTask task = createTask( 1);
         mRegisterActivity.setTask(task);
@@ -188,7 +188,30 @@ public class RegisterActivityTest {
 
         // ●verify(検証)
         String message = TestUtils.getLatestAlertDialogMessage();
-        assertThat(message, is(RuntimeEnvironment.application.getString(R.string.pass_input_short)));
+        assertThat(message, is(RuntimeEnvironment.application.getString(R.string.Not_allowed_error)));
+    }
+
+    /**
+     * 登録失敗でダイアログ表示の確認
+     */
+    @Test
+    public void registerFailedByNotMatchPass() {
+        // ●setup(準備)
+        // IDとPassを設定
+
+        enterIdAndPass("aaaaaa", "bbbbbbbb","cccccccc");
+        // LoginTaskで必ず成功が返るように設定
+        RegisterTask task = createTask( 1);
+        mRegisterActivity.setTask(task);
+        Button registerButton = mRegisterActivity.findViewById(R.id.registration);
+
+        // ●execute(テストの実施)
+        // 登録ボタンを押下
+        registerButton.performClick();
+
+        // ●verify(検証)
+        String message = TestUtils.getLatestAlertDialogMessage();
+        assertThat(message, is(RuntimeEnvironment.application.getString(R.string.pass_not_match)));
     }
 
 
