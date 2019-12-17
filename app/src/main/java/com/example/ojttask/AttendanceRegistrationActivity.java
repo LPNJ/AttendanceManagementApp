@@ -1,7 +1,6 @@
 package com.example.ojttask;
 
 import Task.serialize.AttendanceRequest;
-import Task.serialize.EventCreateRequest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -12,10 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,6 +26,10 @@ import entity.AttendanceType;
 import entity.CandidateDate;
 import entity.EventInfo;
 import entity.LoginUser;
+import validator.AttendanceValidator;
+import validator.EventCreateValidator;
+
+import static entity.AttendanceType.valueOf;
 
 /**
  * 出欠登録画面
@@ -37,6 +38,11 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
     private static final String TAG = AttendanceRegistrationActivity.class.getSimpleName();
     private EventInfo mEventInfo;
     private CandidateDate mTargetDate;
+
+    private RadioGroup mRagioGroup;
+    private EditText mUserName;
+
+
     private final AttendanceRegistrationTask mAttendanceRegistrationTask;
     private AdapterView.OnItemSelectedListener mItemClickListener =  new AdapterView.OnItemSelectedListener() {
         //　アイテムが選択された時
@@ -66,10 +72,15 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
         mAttendanceRegistrationTask = new AttendanceRegistrationMock();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_registration);
+
+        mRagioGroup = findViewById(R.id.radio_group);
+        mUserName = findViewById(R.id.event_attendance_name);
+
         Serializable data = getIntent().getSerializableExtra(IntentKey.REFERENCE_EVENT);
         if (data instanceof EventInfo) {
             mEventInfo = (EventInfo) data;
@@ -92,8 +103,6 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
         ((RadioGroup)findViewById(R.id.radio_group)).setOnCheckedChangeListener(this);
         findViewById(R.id.event_attendance_reference).setOnClickListener(listener);
         findViewById(R.id.event_attendance_decision).setOnClickListener(listener);
-        AttendanceRegistrationTask task = new AttendanceRegistrationMock();
-        //task.execute(new AttendanceRequest());
     }
 
     @Override
@@ -136,9 +145,36 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
                     startActivity(intent);
                     break;
                 case R.id.event_attendance_decision: {
-                    mAttendanceRegistrationTask.execute(
-                            new AttendanceRequest(LoginUser.getInstance().getLoginUserId(), mEventInfo.getEventId(),
-                                    mEventInfo.getCandidateDates()), AttendanceRegistrationActivity.this);
+
+                    switch (v.getId()) {
+                        case R.id.event_attendance_reference:
+                            break;
+                    }
+
+                    int radioButtonID = mRagioGroup.getCheckedRadioButtonId();
+                    View radioButton = mRagioGroup.findViewById(radioButtonID);
+                    int idx = mRagioGroup.indexOfChild(radioButton);
+                    Log.i("id",String.valueOf(idx));
+
+                    AttendanceInfo info = new AttendanceInfo(mUserName.getText().toString(), valueOf(idx));
+                    int validationResult = new AttendanceValidator().validate(info);
+                    if(validationResult == 1) {
+                        new AlertDialog.Builder(AttendanceRegistrationActivity.this)
+                                .setMessage(R.string.login_error)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else if(validationResult == 10) {
+                        new AlertDialog.Builder(AttendanceRegistrationActivity.this)
+                                .setMessage(R.string.attendance_user_name)
+                                .setPositiveButton(R.string.ok, null)
+                                .create()
+                                .show();
+                    }else{
+                        AttendanceRequest request = new AttendanceRequest(
+                                LoginUser.getInstance().getLoginUserId(), mEventInfo.getEventId(), mEventInfo.getCandidateDates());
+                        mAttendanceRegistrationTask.execute(request, AttendanceRegistrationActivity.this);
+                    }
                     break;
                 }
             }

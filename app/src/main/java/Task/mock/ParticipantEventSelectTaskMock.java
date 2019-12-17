@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Task.EventSelectTask;
+import Task.ParticipantEventTask;
 import Task.ResultListener;
 import Task.serialize.EventSelectResponse;
 import entity.AttendanceInfo;
@@ -11,7 +12,7 @@ import entity.AttendanceType;
 import entity.CandidateDate;
 import entity.EventInfo;
 
-public class ParticipantEventSelectTaskMock implements EventSelectTask {
+public class ParticipantEventSelectTaskMock implements ParticipantEventTask {
     @Override
     public void execute(String userId, ResultListener listener) {
         List<EventInfo> eventList = new ArrayList<>();

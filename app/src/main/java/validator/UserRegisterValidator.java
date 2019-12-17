@@ -1,5 +1,7 @@
 package validator;
 
+import android.util.Log;
+
 import java.util.regex.Pattern;
 
 import entity.EditableUserInfo;
