@@ -25,6 +25,7 @@ import java.util.List;
 import Picker.DatePickerFragment;
 import Picker.TimePickerFragment;
 import Task.EventCreateTask;
+import Task.LoginTask;
 import Task.ResultListener;
 import Task.mock.EventCreateTaskMock;
 import Task.serialize.EventCreateRequest;
@@ -59,7 +60,16 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
     private static final String DATE_PICKER = "date picker";
     private static final String TIME_PICKER = "time picker";
 
-    private final EventCreateTask mEventCreateTask;
+    private EventCreateTask mEventCreateTask;
+
+
+    /**
+     * MT用
+     * @param task
+     */
+    public void setTask(EventCreateTask task) {
+        mEventCreateTask = task;
+    }
 
     /** 現在操作しているテキストビューのID */
     private int mTargetTextViewId;
@@ -201,9 +211,9 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                     } else if (returnCode == 1) {
                         show(R.string.login_error);
                     } else if (returnCode == 8) {
-                        show(R.string.Not_allowed_error);
+                        show(R.string.eventname_input_over);
                     } else if (returnCode == 9) {
-                        show(R.string.id_input_long);
+                        show(R.string.eventdetails_input_over);
                     }
                 }
                 break;

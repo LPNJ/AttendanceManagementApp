@@ -1,5 +1,7 @@
 package validator;
 
+import android.util.Log;
+
 import entity.EventInfo;
 
 public class EventCreateValidator implements Validator<EventInfo> {
@@ -15,6 +17,7 @@ public class EventCreateValidator implements Validator<EventInfo> {
 
     @Override
     public int validate(EventInfo data) {
+        Log.i("eventName",data.getEventName());
         // 入力がない
         if (data.getEventName() == null || data.getEventName().isEmpty() || data.getCandidateDates().isEmpty()) {
             return ERROR_NOT_INPUT;

@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import Task.LoginTask;
 import Task.ResultListener;
+import Task.impl.LoginTaskImpl;
 import Task.mock.LoginTaskMock;
 import entity.LoginUser;
 import entity.UserInfo;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
      */
     public MainActivity() {
         super();
-        mLoginTask = new LoginTaskMock(/*this*/);
+        mLoginTask = new LoginTaskImpl(MainActivity.this);
     }
 
     /**
