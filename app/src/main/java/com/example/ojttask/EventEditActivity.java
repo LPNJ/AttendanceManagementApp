@@ -52,7 +52,7 @@ public class EventEditActivity extends AppCompatActivity implements DatePickerDi
     private static final String DATE_PICKER = "date picker";
     private static final String TIME_PICKER = "time picker";
 
-    private final EventCreateTask mEventCreateTask;
+    private EventCreateTask mEventCreateTask;
 
     /** 現在操作しているテキストビューのID */
     private int mTargetTextViewId;
@@ -66,6 +66,10 @@ public class EventEditActivity extends AppCompatActivity implements DatePickerDi
         super();
         mEventCreateTask = new EventCreateTaskMock(/*this*/);
         Log.i("Regist","register activity constructor");
+    }
+
+    void setTask(EventCreateTask task) {
+        mEventCreateTask = task;
     }
     private Button mBottun_registration_edit;
 
@@ -225,7 +229,7 @@ public class EventEditActivity extends AppCompatActivity implements DatePickerDi
                 String date = mDisplayDate[i].getText().toString();
                 String time = mDisplayTime[i].getText().toString();
                 dateTime.add(date.trim() + " " + time.trim());
-                if (date == null || time == null) {
+                if (date == null || time == null || date.isEmpty() || time.isEmpty()) {
                     // TODO 空だったらエラー（Validation)
                     continue;
                 }
