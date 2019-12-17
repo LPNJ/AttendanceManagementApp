@@ -57,7 +57,7 @@ public class EventSelectActivityTest {
         listView.performItemClick(null, 0, 0);
 
         // ●verify(検証)
-        String nextActivityName = TestUtils.getLatestAlertDialogMessage(activity);
+        String nextActivityName = TestUtils.getNextActivityName(activity);
         assertThat(nextActivityName, is(EventEditActivity.class.getName()));
     }
     @Test
@@ -71,7 +71,7 @@ public class EventSelectActivityTest {
         listView.performItemClick(null, 0, 0);
 
         // ●verify(検証)
-        String nextActivityName = TestUtils.getLatestAlertDialogMessage(activity);
+        String nextActivityName = TestUtils.getNextActivityName(activity);
         assertThat(nextActivityName, is(DeleteActivity.class.getName()));
     }
 
