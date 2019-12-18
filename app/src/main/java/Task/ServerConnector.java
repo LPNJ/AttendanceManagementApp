@@ -57,6 +57,7 @@ public class ServerConnector {
         con.setConnectTimeout(CONNECTION_TIMEOUT);
         con.setReadTimeout(READ_TIMEOUT);
         con.setUseCaches(false);
+        con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
         setMethod(con, request.getMethod());
         con.setDoOutput(request.isDoOutput());
         con.setDoInput(true);
