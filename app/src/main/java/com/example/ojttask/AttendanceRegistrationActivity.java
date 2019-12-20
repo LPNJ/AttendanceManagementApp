@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.impl.AttendanceRegistrationTaskImpl;
 import Task.serialize.AttendanceRequest;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -69,7 +70,7 @@ public class AttendanceRegistrationActivity extends AppCompatActivity implements
      */
     public AttendanceRegistrationActivity() {
         super();
-        mAttendanceRegistrationTask = new AttendanceRegistrationMock();
+        mAttendanceRegistrationTask = new AttendanceRegistrationTaskImpl(AttendanceRegistrationActivity.this);
     }
 
 

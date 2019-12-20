@@ -1,5 +1,7 @@
 package Task;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import java.io.OutputStream;
@@ -7,9 +9,12 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 
 public class ServerRequest {
+
+    private static final String TAG = "ServReq";
+
     enum MethodType {
         POST("POST", true),
-        GET("GET", false),
+        GET("GET", true),
         DELETE("DELETE", true);
 
         private final String mMethod;
@@ -37,7 +42,8 @@ public class ServerRequest {
         DELETE_EVENT("event", MethodType.DELETE),
         GET_ALL_EVENT("eventlist", MethodType.GET),
         REGISTER_ATTENDANCE("attendance", MethodType.POST),
-        GET_ALL_ATTENDANCE_EVENT("attendancelist", MethodType.GET);
+        //GET_ALL_ATTENDANCE_EVENT("attendancelist", MethodType.GET);
+        GET_ALL_ATTENDANCE_EVENT("attendanceeventlist", MethodType.GET);
 
         private final String mUrl;
         private final MethodType mMethodType;
@@ -91,6 +97,7 @@ public class ServerRequest {
             // 発生しないはず
             throw new IllegalArgumentException("Encoding is incorrect. "+ ENCODING, e);
         } finally {
+            Log.i(TAG, "json: " + mRequestBody.toString());
             if (ps == null) return;
             ps.close();
         }

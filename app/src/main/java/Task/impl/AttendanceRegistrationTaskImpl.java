@@ -13,6 +13,7 @@ public class AttendanceRegistrationTaskImpl extends SimpleServerTask<AttendanceR
 
     public AttendanceRegistrationTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.REGISTER_ATTENDANCE, listener);
+//        super(ServerRequest.RequestType.GET_ALL_ATTENDANCE_EVENT, listener);
     }
 
     @Override

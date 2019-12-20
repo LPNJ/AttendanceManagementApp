@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.impl.DeleteTaskImpl;
 import Task.serialize.EventCreateRequest;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,13 +34,13 @@ public class DeleteActivity extends AppCompatActivity implements ResultListener<
 
     private EventInfo mEventInfo;
 
-    private DeleteTaskMock mDeleteTask;
+    private DeleteTaskImpl mDeleteTask;
 
     /**
      * デフォルトコンストラクタ
      */
     public DeleteActivity() {
-        mDeleteTask = new DeleteTaskMock(/*this*/);
+        mDeleteTask = new DeleteTaskImpl(DeleteActivity.this);
         Log.i("Regist","register activity constructor");
     }
 

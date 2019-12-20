@@ -54,12 +54,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent_ParticipatingEventSelect);
                 }
                 break;
-
-            case R.id.notice: {
-//                Intent intent_notice = new Intent(MenuActivity.this, Activity.class);
-//                startActivity(intent_notice);
-            }
-            break;
             }
         }
 

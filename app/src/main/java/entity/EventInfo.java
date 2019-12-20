@@ -2,6 +2,7 @@ package entity;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,7 +27,7 @@ public class EventInfo implements Serializable {
             return mStatus;
         }
 
-        EventStatus valueOf(int status) {
+        static EventStatus valueOf(int status) {
             for (EventStatus s : EventStatus.values()) {
                 if (s.toInt() == status) {
                     return s;
@@ -149,31 +150,39 @@ public class EventInfo implements Serializable {
     }
 
     public static EventInfo parseJson(JSONObject json) throws JSONException {
+        Log.i("get json",json.toString());
         String eventId = json.optString("eventId");
-        JSONObject data = json.optJSONObject(DATA);
+//        JSONObject data = json.optJSONObject(DATA);
+        String dataString = json.optString(DATA);
+        JSONObject data = new JSONObject(dataString);
         String eventName = data.optString(EVENT_NAME);
         String eventDetail = data.optString(EVENT_DETAIL);
-        String eventStatus = data.optString(EVENT_STATUS);
-        List<JSONObject> candidate = (List) json.opt(CANDIDATES);
+        int eventStatus = data.optInt(EVENT_STATUS);
+        String candidateString = data.getString(CANDIDATES);
+        JSONArray candidateArray = new JSONArray(candidateString);
         List<CandidateDate> candidateDates = new ArrayList<>();
-        for (JSONObject cand : candidate) {
-            candidateDates.add(new CandidateDate(cand.optString("date"), cand.optString("time")));
+        for (int i = 0; i < candidateArray.length(); i++) {
+            JSONObject candidate = new JSONObject(candidateArray.getString(i));
+            candidateDates.add(new CandidateDate(candidate.optString("date"), candidate.optString("time")));
         }
+//        List<JSONObject> candidate = (List) json.opt(CANDIDATES);
+//        List<CandidateDate> candidateDates = new ArrayList<>();
+//        for (JSONObject cand : candidate) {
+//            candidateDates.add(new CandidateDate(cand.optString("date"), cand.optString("time")));
+//        }
         EventInfo eventInfo = new EventInfo(eventName, eventDetail, eventId, candidateDates);
         eventInfo.setStatus(EventStatus.valueOf(eventStatus));
 
-        List<JSONObject> attendanceList = (List) json.opt("attendanceList");
-        for (JSONObject attendance : attendanceList) {
-
-            String userName = attendance.optString("userId");
-            List<JSONObject> candidates = (List) json.opt(CANDIDATES);
-            for (JSONObject obj : candidates) {
-                String date = obj.optString("date");
-                String time = obj.optString("time");
-                int status = obj.optInt("attendanceStatus");
-                AttendanceInfo info = new AttendanceInfo(userName, AttendanceType.valueOf(status));
-                eventInfo.addAttendanceTo(date, time, info);
-            }
+        JSONArray attendanceList = json.getJSONArray("attendanceList");
+        for (int i = 0; i <attendanceList.length(); i++) {
+            JSONObject attendance = attendanceList.getJSONObject(i);
+            String userName = attendance.getString("userId");
+            String dataStr = attendance.getString("data");
+            JSONObject dataObj  = new JSONObject(dataStr);
+            String date = dataObj.optString("date");
+            String time = dataObj.optString("time");
+            int status = dataObj.optInt("attendanceStatus");
+            eventInfo.addAttendanceTo(date, time, new AttendanceInfo(userName, AttendanceType.valueOf(status)));
         }
         return eventInfo;
     }

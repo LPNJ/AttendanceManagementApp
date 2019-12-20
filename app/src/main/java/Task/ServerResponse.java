@@ -48,6 +48,7 @@ public class ServerResponse {
     }
 
     public JSONObject getResponseJson() {
+        Log.i("", "response json : " + mResponseBody);
         try {
             return new JSONObject(mResponseBody);
         } catch (JSONException e) {

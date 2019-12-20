@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
                 }
                 break;
                 case R.id.login: {
+                    Log.i("LOGIN","SUCCESS");
                     mId_info = mId.getText().toString();
                     mPass_info = mPass.getText().toString();
                     int validationResult = new UserLoginValidator().validate(new UserInfo(mId_info,mPass_info));
@@ -101,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
 
     @Override
     public void onResult(Integer result) {
-        if (result == 1) {
+        if (result == 21) {
             new AlertDialog.Builder(MainActivity.this)
                     .setMessage(R.string.cannot_login)
                     .setPositiveButton("OK", null)
@@ -109,8 +111,18 @@ public class MainActivity extends AppCompatActivity implements ResultListener<In
                     .show();
             return;
         }
-        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-        startActivity(intent);
+        else if(result == 0){
+            Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+            startActivity(intent);
+        }
+        else{
+            new AlertDialog.Builder(MainActivity.this)
+                    .setMessage(R.string.cannot_connect)
+                    .setPositiveButton("OK", null)
+                    .create()
+                    .show();
+            return;
+        }
     }
 }
 

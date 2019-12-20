@@ -2,6 +2,7 @@ package com.example.ojttask;
 
 import Task.EventSelectTask;
 import Task.ParticipantEventTask;
+import Task.impl.ParticipantEventTaskImpl;
 import Task.mock.ParticipantEventSelectTaskMock;
 import Task.serialize.EventCreateRequest;
 import Task.serialize.EventSelectResponse;
@@ -45,7 +46,7 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
      * デフォルトコンストラクタ
      */
     public ParticipatingEventSelectActivity() {
-        mEventSelectTask = new ParticipantEventSelectTaskMock();
+        mEventSelectTask = new ParticipantEventTaskImpl(ParticipatingEventSelectActivity.this);
         Log.i(TAG, "activity constructor");
     }
 
@@ -65,7 +66,6 @@ public class ParticipatingEventSelectActivity extends AppCompatActivity implemen
         mEventId = findViewById(R.id.eventid_participating);
         mRegistration_participating = findViewById(R.id.registration_participating);
         mRegistration_participating.setOnClickListener(new ParticipatingEventSelectActivityOnClickListener());
-
     }
 
     @Override

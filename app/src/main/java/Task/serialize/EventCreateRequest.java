@@ -43,7 +43,7 @@ public class EventCreateRequest {
         try {
             JSONObject request = new JSONObject()
                     .put("userId", mUserId)
-                    .put("data", mEventInfo.toJson());
+                    .put("data", mEventInfo.toJson().toString());
             if (type == CreateType.EDIT) {
                 request.put("eventId", mEventInfo.getEventId());
             }

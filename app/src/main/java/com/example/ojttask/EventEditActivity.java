@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.impl.EventCreateTaskImpl;
 import Task.serialize.EventCreateResponse;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -64,7 +65,7 @@ public class EventEditActivity extends AppCompatActivity implements DatePickerDi
      */
     public EventEditActivity() {
         super();
-        mEventCreateTask = new EventCreateTaskMock(/*this*/);
+        mEventCreateTask = new EventCreateTaskImpl(EventEditActivity.this);
         Log.i("Regist","register activity constructor");
     }
 

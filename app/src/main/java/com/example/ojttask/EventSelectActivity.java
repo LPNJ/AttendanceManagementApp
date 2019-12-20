@@ -1,5 +1,6 @@
 package com.example.ojttask;
 
+import Task.impl.EventSelectTaskImpl;
 import Task.serialize.EventCreateResponse;
 import Task.serialize.EventSelectResponse;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +29,7 @@ public class EventSelectActivity extends AppCompatActivity implements ResultList
      * デフォルトコンストラクタ
      */
     public EventSelectActivity() {
-        mEventSelectTask = new EventSelectTaskMock();
+        mEventSelectTask = new EventSelectTaskImpl(EventSelectActivity.this);
         Log.i("Menu","menu activity constructor");
     }
 

@@ -200,26 +200,29 @@
 
     <EditText
         android:id="@+id/EventName_Create"
-        android:layout_width="299dp"
-        android:layout_height="32dp"
+        android:layout_width="289dp"
+        android:layout_height="65dp"
         android:ems="10"
+        android:hint="イベント名"
         android:inputType="textPersonName"
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.158" />
+        app:layout_constraintVertical_bias="0.144" />
 
     <EditText
         android:id="@+id/EventInfo_Create"
-        android:layout_width="203dp"
-        android:layout_height="33dp"
+        android:layout_width="210dp"
+        android:layout_height="48dp"
         android:ems="10"
+        android:hint="イベント詳細"
         android:inputType="textPersonName"
-        android:textSize="5dp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.259" />

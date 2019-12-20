@@ -29,6 +29,13 @@ public class ServerConnector {
      * @throws IOException
      */
     HttpURLConnection getHttpURLConnection(String urlStr) throws IOException {
+        if(urlStr == null)
+        {
+            Log.e("URL", "NULL");
+        }
+        else {
+            Log.e("URL", urlStr);
+        }
         try {
             URL url = new URL(urlStr);
             return getUrlConnection(url);
@@ -57,7 +64,8 @@ public class ServerConnector {
         con.setConnectTimeout(CONNECTION_TIMEOUT);
         con.setReadTimeout(READ_TIMEOUT);
         con.setUseCaches(false);
-        con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        //con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        con.setRequestProperty("Content-Type", "application/json");
         setMethod(con, request.getMethod());
         con.setDoOutput(request.isDoOutput());
         con.setDoInput(true);
@@ -69,10 +77,10 @@ public class ServerConnector {
             con.connect();
 
             // リスエストを作成
-            if (request.getMethod().equals(ServerRequest.MethodType.GET.getMethod())) {
+//            if (!request.getMethod().equals(ServerRequest.MethodType.GET.getMethod())) {
                 requestOs = con.getOutputStream();
                 request.writeRequestBody(requestOs);
-            }
+//            }
 
             int statusCode = con.getResponseCode();
 

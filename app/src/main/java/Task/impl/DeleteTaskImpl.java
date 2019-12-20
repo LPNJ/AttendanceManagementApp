@@ -17,7 +17,7 @@ public class DeleteTaskImpl
         extends SimpleServerTask<EventCreateRequest> implements DeleteTask {
     private EventEditTask mEventEditTask;
 
-    DeleteTaskImpl(ResultListener listener) {
+    public DeleteTaskImpl(ResultListener listener) {
         super(ServerRequest.RequestType.DELETE_EVENT, listener);
         mEventEditTask = new EventEditTaskImpl(listener);
 

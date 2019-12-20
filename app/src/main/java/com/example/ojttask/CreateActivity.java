@@ -27,11 +27,13 @@ import Picker.TimePickerFragment;
 import Task.EventCreateTask;
 import Task.LoginTask;
 import Task.ResultListener;
+import Task.impl.EventCreateTaskImpl;
 import Task.mock.EventCreateTaskMock;
 import Task.serialize.EventCreateRequest;
 import entity.CandidateDate;
 import entity.EventInfo;
 import Task.serialize.EventCreateResponse;
+import entity.LoginUser;
 import validator.EventCreateValidator;
 
 public class CreateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerFragment.TimePickerlistener , ResultListener<EventCreateResponse> {
@@ -78,7 +80,7 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
      */
     public CreateActivity() {
         super();
-        mEventCreateTask = new EventCreateTaskMock(/*this*/);
+        mEventCreateTask = new EventCreateTaskImpl(CreateActivity.this);
         Log.i("Regist","register activity constructor");
     }
     private Button mBottun_registration_create;
@@ -203,8 +205,8 @@ public class CreateActivity extends AppCompatActivity implements DatePickerDialo
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         List<CandidateDate> dates = createCandidateDateList();
-                                        EventInfo ei = new EventInfo(mEventName.toString(),mEventDetails.toString(),EventInfo.UNDEFINED_EVENT_NUMBER, dates);
-                                        mEventCreateTask.execute(new EventCreateRequest("",ei), CreateActivity.this);
+                                        EventInfo ei = new EventInfo(mEventName.getText().toString(),mEventDetails.getText().toString(),EventInfo.UNDEFINED_EVENT_NUMBER, dates);
+                                        mEventCreateTask.execute(new EventCreateRequest(LoginUser.getInstance().getLoginUserId(),ei), CreateActivity.this);
                                     }
                                 })
                                 .setNegativeButton("Cancel", null).show();

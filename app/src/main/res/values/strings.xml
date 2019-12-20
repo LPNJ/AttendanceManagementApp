@@ -19,7 +19,7 @@
 
     <string name="cannot_connect">サーバーへの接続ができませんでした</string>
 
-    <string name="cannot_login">ログインに失敗しました</string>
+    <string name="cannot_login">IDまたはパスワードが間違っています</string>
     <string name="decision">内容を確定しますか？</string>
 
     <string name="ok">OK</string>

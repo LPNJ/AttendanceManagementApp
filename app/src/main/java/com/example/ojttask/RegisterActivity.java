@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import Task.RegisterTask;
+import Task.impl.RegisterTaskImpl;
 import Task.mock.RegisterTaskMock;
 import Task.ResultListener;
 import entity.EditableUserInfo;
@@ -67,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements ResultListene
      */
     public RegisterActivity() {
         super();
-        mRegisterTask = new RegisterTaskMock(/*this*/);
+        mRegisterTask = new RegisterTaskImpl(RegisterActivity.this);
         mErrorMessage.put(-1, R.string.cannot_connect);
         mErrorMessage.put(1, R.string.cannot_register_error);
         Log.i("Regist", "register activity contstructor");
